@@ -1,0 +1,81 @@
+Apps, Contact, Chat with AI, Footer, Vercel Config
+Prompt untuk Replit: Website Teknik Informatika (Bagian 2)
+Lanjutan website static bertema Teknik Informatika, ringan untuk Vercel. Warna: navy blue (#000080) di Light mode, cyan (#00FFFF) di Dark mode. Gunakan API https://fastrestapis.fasturl.cloud/aillm/gpt-4o untuk Chat with AI. UI Chat elegan (glassmorphism, neon border).
+Fitur Website:
+5. Apps:
+Judul: "Aplikasi Kami".
+3 card: Convert to PDF, Catatan, Menfess (href: "#").
+Card: Ikon placeholder, teks, tombol "Kunjungi" (hover navy blue/cyan).
+Layout: Grid, responsive.
+Contact:
+Judul: "Connect with Us".
+Ikon: Instagram, Discord (href: "#", hover navy blue/cyan).
+Form: Input Nama, Pesan, tombol "Kirim" (tampil 3 pesan terbaru, scrollable).
+Card pesan: Border navy blue/cyan.
+Chat with AI (Floating Button):
+Posisi: Pojok kanan bawah (fixed, ikon 💬, bulat, ripple effect).
+Fungsi: Buka/tutup pop-up chatbox (input + riwayat).
+Desain:
+Light mode: Navy blue (#000080) button/border, bg putih, glassmorphism.
+Dark mode: Cyan (#00FFFF) button/border, bg hitam, neon glow.
+Chatbox: 300x300px, riwayat scrollable, animasi slide-in, Roboto Mono.
+Pesan: User (bold, navy blue/cyan), AI (italic, abu-abu).
+Logika:
+Panggil API https://fastrestapis.fasturl.cloud/aillm/gpt-4o via fetch.
+Request:
+javascript
+fetch('https://fastrestapis.fasturl.cloud/aillm/gpt-4o', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_KEY' },
+    body: JSON.stringify({ message: input })
+}).then(res => res.json()).then(data => data.reply);
+Mock response: "AI: Halo, apa kabar?".
+API key di Vercel Environment Variables.
+Footer:
+Teks: "Dibuat oleh INFORMATIKA 032" (Orbitron, center).
+Tombol: Scroll-to-top (panah atas, hover navy blue/cyan).
+Tanpa elemen lain.
+Spesifikasi Teknis:
+JS:
+Form Contact: 3 pesan terbaru (localStorage).
+Chat with AI: Fetch API/mock, riwayat sementara.
+Axios via CDN: https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js.
+Vercel Config (vercel.json):
+json
+{
+  "version": 2,
+  "builds": [
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "api/chat.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}
+Serverless Function (opsional, api/chat.js):
+javascript
+module.exports = async (req, res) => {
+    try {
+        const response = await fetch('https://fastrestapis.fasturl.cloud/aillm/gpt-4o', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${process.env.API_KEY}`
+            },
+            body: JSON.stringify(req.body)
+        });
+        const data = await response.json();
+        res.status(200).json({ reply: data.reply || 'AI: Halo, apa kabar?' });
+    } catch (error) {
+        res.status(500).json({ reply: 'AI: Error connecting' });
+    }
+};
+Optimasi:
+Gambar WebP, proyek <2MB.
+Minifikasi CSS/JS.
+Cache assets via Vercel.
+Output Akhir:
+File: index.html, styles.css, script.js, assets/, api/chat.js, vercel.json.
+Website statis, Chat AI elegan, siap deploy Vercel.
+Kedua bagian ini membentuk prompt lengkap, dibagi rata untuk kemudahan copy-paste. Bagian 1 fokus pada struktur awal dan section utama (Header, Hero, About, Galeri), sedangkan Bagian 2 melengkapi dengan Apps, Contact, Chat with AI, Footer, dan konfigurasi Vercel.
