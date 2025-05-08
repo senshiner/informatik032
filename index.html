@@ -84,14 +84,18 @@
   <section id="about" class="about">
     <div class="container">
       <h2 class="section-title">About Informatics</h2>
-      <p class="about-text">Website kelas Universitas Pamulang untuk inovasi teknologi. Kami membangun masa depan dengan kode, kreativitas, dan kolaborasi.</p>
+      <div class="about-card">
+        <div class="about-card-content">
+          <p class="about-text">Website kelas Universitas Pamulang untuk inovasi teknologi. Kami membangun masa depan dengan kode, kreativitas, dan kolaborasi.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Gallery Section -->
   <section id="gallery" class="gallery">
     <div class="container">
-      <h2 class="section-title">Galeri Keren Kami</h2>
+      <h2 class="section-title">Galeri</h2>
       
       <div class="gallery-filter">
         <button class="filter-btn active" data-filter="all">All</button>
@@ -100,52 +104,121 @@
         <button class="filter-btn" data-filter="sports">Sports</button>
       </div>
       
-      <div class="gallery-container">
-        <!-- Class Category -->
-        <div class="gallery-category" data-category="class">
-          <h3>Class</h3>
-          <div class="gallery-grid">
-            <div class="gallery-item">
-              <img src="assets/gallery/class1.webp" alt="Class 1">
+      <div class="gallery-grid-container">
+        <div class="gallery-card" data-category="class">
+          <div class="gallery-image">
+            <img src="assets/gallery/class1.webp" alt="Outbound">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Outbound</div>
             </div>
-            <div class="gallery-item">
-              <img src="assets/gallery/class2.webp" alt="Class 2">
-            </div>
-            <div class="gallery-item">
-              <img src="assets/gallery/class3.webp" alt="Class 3">
-            </div>
+          </div>
+          <div class="gallery-info">
+            <h3>Outbound</h3>
+            <p>Team Building Activity</p>
           </div>
         </div>
         
-        <!-- Random Event Category -->
-        <div class="gallery-category" data-category="event">
-          <h3>Random Event</h3>
-          <div class="gallery-grid">
-            <div class="gallery-item">
-              <img src="assets/gallery/event1.webp" alt="Event 1">
+        <div class="gallery-card" data-category="class">
+          <div class="gallery-image">
+            <img src="assets/gallery/class2.webp" alt="Class 2">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Classroom</div>
             </div>
-            <div class="gallery-item">
-              <img src="assets/gallery/event2.webp" alt="Event 2">
-            </div>
-            <div class="gallery-item">
-              <img src="assets/gallery/event3.webp" alt="Event 3">
-            </div>
+          </div>
+          <div class="gallery-info">
+            <h3>Classroom</h3>
+            <p>Learning Session</p>
           </div>
         </div>
         
-        <!-- Sports Category -->
-        <div class="gallery-category" data-category="sports">
-          <h3>Sports</h3>
-          <div class="gallery-grid">
-            <div class="gallery-item">
-              <img src="assets/gallery/sports1.webp" alt="Sports 1">
+        <div class="gallery-card" data-category="class">
+          <div class="gallery-image">
+            <img src="assets/gallery/class3.webp" alt="Class 3">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Workshop</div>
             </div>
-            <div class="gallery-item">
-              <img src="assets/gallery/sports2.webp" alt="Sports 2">
+          </div>
+          <div class="gallery-info">
+            <h3>Workshop</h3>
+            <p>Hands-on Experience</p>
+          </div>
+        </div>
+        
+        <div class="gallery-card" data-category="event">
+          <div class="gallery-image">
+            <img src="assets/gallery/event1.webp" alt="Event 1">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Seminar</div>
             </div>
-            <div class="gallery-item">
-              <img src="assets/gallery/sports3.webp" alt="Sports 3">
+          </div>
+          <div class="gallery-info">
+            <h3>Seminar</h3>
+            <p>Tech Talk Session</p>
+          </div>
+        </div>
+        
+        <div class="gallery-card" data-category="event">
+          <div class="gallery-image">
+            <img src="assets/gallery/event2.webp" alt="Event 2">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Hackathon</div>
             </div>
+          </div>
+          <div class="gallery-info">
+            <h3>Hackathon</h3>
+            <p>Coding Competition</p>
+          </div>
+        </div>
+        
+        <div class="gallery-card" data-category="event">
+          <div class="gallery-image">
+            <img src="assets/gallery/event3.webp" alt="Event 3">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Conference</div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h3>Conference</h3>
+            <p>Industry Networking</p>
+          </div>
+        </div>
+        
+        <div class="gallery-card" data-category="sports">
+          <div class="gallery-image">
+            <img src="assets/gallery/sports1.webp" alt="Sports 1">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Football</div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h3>Football</h3>
+            <p>Team Sports Event</p>
+          </div>
+        </div>
+        
+        <div class="gallery-card" data-category="sports">
+          <div class="gallery-image">
+            <img src="assets/gallery/sports2.webp" alt="Sports 2">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Basketball</div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h3>Basketball</h3>
+            <p>Campus Tournament</p>
+          </div>
+        </div>
+        
+        <div class="gallery-card" data-category="sports">
+          <div class="gallery-image">
+            <img src="assets/gallery/sports3.webp" alt="Sports 3">
+            <div class="gallery-overlay">
+              <div class="gallery-title">Volleyball</div>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <h3>Volleyball</h3>
+            <p>Friendly Match</p>
           </div>
         </div>
       </div>

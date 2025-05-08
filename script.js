@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Gallery Filter Functionality
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const galleryCategories = document.querySelectorAll('.gallery-category');
+  const galleryCards = document.querySelectorAll('.gallery-card');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', function() {
@@ -204,12 +204,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const filter = this.getAttribute('data-filter');
 
-      // Filter gallery categories
-      galleryCategories.forEach(category => {
-        if (filter === 'all' || category.getAttribute('data-category') === filter) {
-          category.style.display = 'block';
+      // Filter gallery cards
+      galleryCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'block';
         } else {
-          category.style.display = 'none';
+          card.style.display = 'none';
         }
       });
     });
