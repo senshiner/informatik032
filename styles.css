@@ -49,7 +49,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -221,10 +221,31 @@ nav ul li a:hover::after {
   justify-content: center;
   align-items: center;
   background-color: #000080;
+  position: relative;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.logo-circle::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #333;
+  border-bottom-color: #333;
+  animation: spin 5s linear infinite;
 }
 
 [data-theme="dark"] .logo-circle {
   border-color: #444;
+}
+
+[data-theme="dark"] .logo-circle::before {
+  border-top-color: #00FFFF;
+  border-bottom-color: #00FFFF;
 }
 
 .hero-logo {
@@ -233,13 +254,34 @@ nav ul li a:hover::after {
   object-fit: cover;
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Motto */
 .motto-container {
   margin-bottom: 3rem;
 }
 
 .motto {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-size: 2rem;
   font-weight: 700;
   color: #000080;
@@ -269,7 +311,7 @@ nav ul li a:hover::after {
   background-color: #333;
   color: #fff;
   padding: 1rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 700;
   font-size: 1.5rem;
   text-align: center;
@@ -299,7 +341,7 @@ nav ul li a:hover::after {
 }
 
 .time-block span {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 700;
 }
 
@@ -516,35 +558,56 @@ nav ul li a:hover::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.4s ease;
+  cursor: pointer;
 }
 
-.gallery-card:hover .gallery-overlay {
+.gallery-card:hover .gallery-overlay,
+.gallery-card.active .gallery-overlay {
   opacity: 1;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6);
 }
 
 .gallery-title {
   color: white;
   font-size: 1.5rem;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.gallery-card:hover .gallery-title,
+.gallery-card.active .gallery-title {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .gallery-info {
   padding: 1rem;
   color: white;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.gallery-card.active .gallery-info {
+  height: auto;
+  opacity: 1;
 }
 
 .gallery-info h3 {
   margin: 0 0 0.5rem 0;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-size: 1.2rem;
 }
 

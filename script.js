@@ -214,6 +214,21 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+  
+  // Gallery card click functionality for text reveal
+  galleryCards.forEach(card => {
+    card.addEventListener('click', function() {
+      // Toggle active class for the clicked card
+      this.classList.toggle('active');
+      
+      // Close other cards
+      galleryCards.forEach(otherCard => {
+        if (otherCard !== this) {
+          otherCard.classList.remove('active');
+        }
+      });
+    });
+  });
 
   // Chat with AI Functionality
   const chatToggle = document.getElementById('chat-toggle');
