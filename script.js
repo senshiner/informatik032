@@ -94,4 +94,176 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+  
+  // Contact Form Functionality
+  const contactForm = document.getElementById('contact-form');
+  const messagesList = document.getElementById('messages-list');
+  
+  // Load messages from localStorage
+  function loadMessages() {
+    const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    
+    // Display the 3 most recent messages
+    messagesList.innerHTML = '';
+    const recentMessages = messages.slice(0, 3);
+    
+    recentMessages.forEach(message => {
+      const messageCard = document.createElement('div');
+      messageCard.classList.add('message-card');
+      
+      messageCard.innerHTML = `
+        <div class="message-header">
+          <span class="message-name">${message.name}</span>
+          <span class="message-date">${message.date}</span>
+        </div>
+        <p class="message-text">${message.text}</p>
+      `;
+      
+      messagesList.appendChild(messageCard);
+    });
+  }
+  
+  // Load messages on page load
+  loadMessages();
+  
+  // Submit form handler
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nameInput = document.getElementById('name');
+    const messageInput = document.getElementById('message');
+    
+    const name = nameInput.value.trim();
+    const message = messageInput.value.trim();
+    
+    if (name && message) {
+      // Create new message object
+      const newMessage = {
+        name: name,
+        text: message,
+        date: new Date().toLocaleDateString()
+      };
+      
+      // Get existing messages
+      const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+      
+      // Add new message to the beginning of the array
+      messages.unshift(newMessage);
+      
+      // Save back to localStorage
+      localStorage.setItem('contactMessages', JSON.stringify(messages));
+      
+      // Reload messages
+      loadMessages();
+      
+      // Clear form
+      nameInput.value = '';
+      messageInput.value = '';
+    }
+  });
+  
+  // Scroll to Top Button
+  const scrollToTopBtn = document.getElementById('scroll-to-top');
+  
+  scrollToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+  
+  // Show/hide scroll to top button based on scroll position
+  window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 300) {
+      scrollToTopBtn.style.display = 'flex';
+    } else {
+      scrollToTopBtn.style.display = 'none';
+    }
+  });
+  
+  // Chat with AI Functionality
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatBox = document.getElementById('chat-box');
+  const chatClose = document.getElementById('chat-close');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+  const chatMessages = document.getElementById('chat-messages');
+  
+  // Toggle chat box
+  chatToggle.addEventListener('click', function() {
+    chatBox.classList.toggle('active');
+  });
+  
+  // Close chat box
+  chatClose.addEventListener('click', function() {
+    chatBox.classList.remove('active');
+  });
+  
+  // Submit chat message
+  chatForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const message = chatInput.value.trim();
+    
+    if (message) {
+      // Add user message to chat
+      addMessage('user', message);
+      
+      // Clear input
+      chatInput.value = '';
+      
+      // Send message to API (or use mock response for now)
+      sendMessage(message);
+    }
+  });
+  
+  // Add message to chat
+  function addMessage(type, text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add(`${type}-message`);
+    
+    let messageContent = text;
+    if (type === 'user') {
+      messageContent = `You: ${text}`;
+    }
+    
+    messageDiv.innerHTML = `<p>${messageContent}</p>`;
+    chatMessages.appendChild(messageDiv);
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
+  // Send message to API
+  async function sendMessage(message) {
+    try {
+      // Use mock response for now (in production, use the actual API)
+      // const response = await axios.post('/api/chat', { message });
+      // const aiResponse = response.data.reply;
+      
+      // Mock response
+      setTimeout(() => {
+        const aiResponse = `AI: Halo, apa kabar?`;
+        addMessage('ai', aiResponse);
+      }, 1000);
+      
+      // In production, uncomment this code and set up environment variables for the API key
+      /*
+      const response = await fetch('https://fastrestapis.fasturl.cloud/aillm/gpt-4o', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_KEY'
+        },
+        body: JSON.stringify({ message })
+      });
+      
+      const data = await response.json();
+      addMessage('ai', data.reply);
+      */
+    } catch (error) {
+      console.error('Error sending message:', error);
+      addMessage('ai', 'AI: Sorry, there was an error connecting to the service.');
+    }
+  }
 });
