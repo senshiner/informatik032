@@ -80,9 +80,16 @@
     <div class="container">
       <h2 class="section-title">Galeri Keren Kami</h2>
       
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="class">Class</button>
+        <button class="filter-btn" data-filter="event">Random Event</button>
+        <button class="filter-btn" data-filter="sports">Sports</button>
+      </div>
+      
       <div class="gallery-container">
         <!-- Class Category -->
-        <div class="gallery-category">
+        <div class="gallery-category" data-category="class">
           <h3>Class</h3>
           <div class="gallery-grid">
             <div class="gallery-item">
@@ -98,7 +105,7 @@
         </div>
         
         <!-- Random Event Category -->
-        <div class="gallery-category">
+        <div class="gallery-category" data-category="event">
           <h3>Random Event</h3>
           <div class="gallery-grid">
             <div class="gallery-item">
@@ -114,7 +121,7 @@
         </div>
         
         <!-- Sports Category -->
-        <div class="gallery-category">
+        <div class="gallery-category" data-category="sports">
           <h3>Sports</h3>
           <div class="gallery-grid">
             <div class="gallery-item">

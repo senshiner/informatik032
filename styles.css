@@ -324,6 +324,33 @@ nav ul li a:hover::after {
   background-color: var(--background-color);
 }
 
+.gallery-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.filter-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  border-radius: 30px;
+  color: var(--primary-color);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
 .gallery-container {
   display: flex;
   flex-direction: column;

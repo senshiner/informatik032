@@ -81,6 +81,16 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       
       const targetId = this.getAttribute('href');
+      
+      // Check if targetId is just "#" (hash only)
+      if (targetId === "#") {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        return;
+      }
+      
       const targetElement = document.querySelector(targetId);
       
       if (targetElement) {
@@ -181,6 +191,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
+  // Gallery Filter Functionality
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryCategories = document.querySelectorAll('.gallery-category');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Remove active class from all buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      
+      // Add active class to clicked button
+      this.classList.add('active');
+      
+      const filter = this.getAttribute('data-filter');
+      
+      // Filter gallery categories
+      galleryCategories.forEach(category => {
+        if (filter === 'all' || category.getAttribute('data-category') === filter) {
+          category.style.display = 'block';
+        } else {
+          category.style.display = 'none';
+        }
+      });
+    });
+  });
+  
   // Chat with AI Functionality
   const chatToggle = document.getElementById('chat-toggle');
   const chatBox = document.getElementById('chat-box');
@@ -237,33 +272,34 @@ document.addEventListener('DOMContentLoaded', function() {
   // Send message to API
   async function sendMessage(message) {
     try {
-      // Use mock response for now (in production, use the actual API)
-      // const response = await axios.post('/api/chat', { message });
-      // const aiResponse = response.data.reply;
+      // Send message to FastURL API
+      const style = "You are a friendly AI assistant for the INFORMATIKA 032 website. Be friendly, informative, and engaging.";
+      const sessionId = localStorage.getItem('sessionId') || 'guest-' + Math.random().toString(36).substring(2, 10);
       
-      // Mock response
-      setTimeout(() => {
-        const aiResponse = `AI: Halo, apa kabar?`;
-        addMessage('ai', aiResponse);
-      }, 1000);
+      if (!localStorage.getItem('sessionId')) {
+        localStorage.setItem('sessionId', sessionId);
+      }
       
-      // In production, uncomment this code and set up environment variables for the API key
-      /*
-      const response = await fetch('https://fastrestapis.fasturl.cloud/aillm/gpt-4o', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer YOUR_KEY'
-        },
-        body: JSON.stringify({ message })
-      });
+      const apiUrl = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o?ask=${encodeURIComponent(message)}&style=${encodeURIComponent(style)}&sessionId=${encodeURIComponent(sessionId)}`;
       
-      const data = await response.json();
-      addMessage('ai', data.reply);
-      */
+      // Show typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.classList.add('ai-message', 'typing-indicator');
+      typingIndicator.innerHTML = '<p>AI is typing...</p>';
+      chatMessages.appendChild(typingIndicator);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      
+      const response = await axios.get(apiUrl);
+      const aiResponse = response.data.result || 'Maaf, saya tidak dapat memproses permintaan Anda saat ini.';
+      
+      // Remove typing indicator
+      chatMessages.removeChild(typingIndicator);
+      
+      // Add AI response
+      addMessage('ai', `AI: ${aiResponse}`);
     } catch (error) {
       console.error('Error sending message:', error);
-      addMessage('ai', 'AI: Sorry, there was an error connecting to the service.');
+      addMessage('ai', 'AI: Maaf, terjadi kesalahan saat menghubungi layanan AI.');
     }
   }
 });
