@@ -215,18 +215,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Gallery card click functionality for text reveal
+  // Gallery card hover-only functionality
   galleryCards.forEach(card => {
-    card.addEventListener('click', function() {
-      // Toggle active class for the clicked card
-      this.classList.toggle('active');
-      
-      // Close other cards
-      galleryCards.forEach(otherCard => {
-        if (otherCard !== this) {
-          otherCard.classList.remove('active');
-        }
-      });
+    card.addEventListener('mouseenter', function() {
+      this.querySelector('.gallery-overlay').style.opacity = '1';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      this.querySelector('.gallery-overlay').style.opacity = '0';
     });
   });
 

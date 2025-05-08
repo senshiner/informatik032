@@ -221,31 +221,10 @@ nav ul li a:hover::after {
   justify-content: center;
   align-items: center;
   background-color: #000080;
-  position: relative;
-  animation: pulse 2s infinite ease-in-out;
-}
-
-.logo-circle::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  border-top-color: #333;
-  border-bottom-color: #333;
-  animation: spin 5s linear infinite;
 }
 
 [data-theme="dark"] .logo-circle {
   border-color: #444;
-}
-
-[data-theme="dark"] .logo-circle::before {
-  border-top-color: #00FFFF;
-  border-bottom-color: #00FFFF;
 }
 
 .hero-logo {
@@ -254,26 +233,7 @@ nav ul li a:hover::after {
   object-fit: cover;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.03);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+/* Removed pulse and spin animations */
 
 /* Motto */
 .motto-container {
@@ -305,6 +265,12 @@ nav ul li a:hover::after {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .countdown-card {
+  background-color: #1a1a1a;
+  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.1);
 }
 
 .timer-header {
@@ -315,11 +281,22 @@ nav ul li a:hover::after {
   font-weight: 700;
   font-size: 1.5rem;
   text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .timer-header {
+  background-color: #1a1a1a;
+  color: #00FFFF;
 }
 
 .timer-body {
   padding: 2rem;
   background-color: #333;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .timer-body {
+  background-color: #1a1a1a;
 }
 
 .timer-grid {
@@ -338,6 +315,13 @@ nav ul li a:hover::after {
   padding: 0.75rem;
   min-width: 100px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .time-block {
+  background-color: #222;
+  box-shadow: 0 4px 8px rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.1);
 }
 
 .time-block span {
@@ -350,10 +334,18 @@ nav ul li a:hover::after {
   color: #fff;
 }
 
+[data-theme="dark"] .time-block span:first-child {
+  color: #00FFFF;
+}
+
 .time-label {
   font-size: 0.9rem;
   color: #aaa;
   letter-spacing: 1px;
+}
+
+[data-theme="dark"] .time-label {
+  color: #7fffff;
 }
 
 .countdown-start {
@@ -370,14 +362,15 @@ nav ul li a:hover::after {
   
   .timer-grid {
     flex-wrap: wrap;
+    gap: 0.5rem;
   }
   
   .time-block {
-    min-width: 80px;
+    min-width: 70px;
   }
   
   .time-block span:first-child {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -391,21 +384,25 @@ nav ul li a:hover::after {
     font-size: 1.2rem;
   }
   
+  .timer-grid {
+    gap: 0.3rem;
+  }
+  
   .time-block {
-    min-width: 65px;
-    padding: 0.5rem;
+    min-width: 60px;
+    padding: 0.4rem;
   }
   
   .time-block span:first-child {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   
   .time-label {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
   
   .countdown-start {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -594,15 +591,7 @@ nav ul li a:hover::after {
 .gallery-info {
   padding: 1rem;
   color: white;
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-.gallery-card.active .gallery-info {
-  height: auto;
-  opacity: 1;
+  display: none;
 }
 
 .gallery-info h3 {
