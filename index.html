@@ -1,16 +1,137 @@
-<!DOCTYPE html>
-<html>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFORMATIKA 032</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="styles.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
-
 <body>
-  Hello world
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <h1>INFORMATIKA 032</h1>
+    </div>
+    <div class="theme-toggle">
+      <button id="theme-toggle-btn">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Galeri</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-nav-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="logo-container">
+        <img src="assets/logo.webp" alt="Informatika Logo" class="hero-logo">
+      </div>
+      <h2 class="hero-title">Perteknologia Nose Universum Regimus</h2>
+      <div class="timer-container">
+        <h3>Terjebak dalam Kelas</h3>
+        <div class="timer">
+          <div class="time-block">
+            <span id="days">00</span>
+            <span class="time-label">Hari</span>
+          </div>
+          <div class="time-block">
+            <span id="hours">00</span>
+            <span class="time-label">Jam</span>
+          </div>
+          <div class="time-block">
+            <span id="minutes">00</span>
+            <span class="time-label">Menit</span>
+          </div>
+          <div class="time-block">
+            <span id="seconds">00</span>
+            <span class="time-label">Detik</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-background"></div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">About Informatics</h2>
+      <p class="about-text">Website kelas Universitas Pamulang untuk inovasi teknologi. Kami membangun masa depan dengan kode, kreativitas, dan kolaborasi.</p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <h2 class="section-title">Galeri Keren Kami</h2>
+      
+      <div class="gallery-container">
+        <!-- Class Category -->
+        <div class="gallery-category">
+          <h3>Class</h3>
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <img src="assets/gallery/class1.webp" alt="Class 1">
+            </div>
+            <div class="gallery-item">
+              <img src="assets/gallery/class2.webp" alt="Class 2">
+            </div>
+            <div class="gallery-item">
+              <img src="assets/gallery/class3.webp" alt="Class 3">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Random Event Category -->
+        <div class="gallery-category">
+          <h3>Random Event</h3>
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <img src="assets/gallery/event1.webp" alt="Event 1">
+            </div>
+            <div class="gallery-item">
+              <img src="assets/gallery/event2.webp" alt="Event 2">
+            </div>
+            <div class="gallery-item">
+              <img src="assets/gallery/event3.webp" alt="Event 3">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sports Category -->
+        <div class="gallery-category">
+          <h3>Sports</h3>
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <img src="assets/gallery/sports1.webp" alt="Sports 1">
+            </div>
+            <div class="gallery-item">
+              <img src="assets/gallery/sports2.webp" alt="Sports 2">
+            </div>
+            <div class="gallery-item">
+              <img src="assets/gallery/sports3.webp" alt="Sports 3">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <script src="script.js"></script>
 </body>
-
 </html>
