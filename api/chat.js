@@ -1,11 +1,4 @@
 
-/**
- * Chat API Handler
- * Proxies requests to AI service
- * Created by: INFORMATIKA 032
- * Last updated: 2024
- */
-
 module.exports = async (req, res) => {
     try {
         const response = await fetch('https://fastrestapis.fasturl.cloud/aillm/gpt-4o', {
