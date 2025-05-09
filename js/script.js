@@ -79,42 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contact-form');
   const messagesList = document.getElementById('messages-list');
 
-  // Functions for message history
-  function addMessageToDOM(messageObj) {
-    const messageCard = document.createElement('div');
-    messageCard.className = 'message-card';
-
-    messageCard.innerHTML = `
-      <div class="message-header">
-        <span class="message-name">${messageObj.name}</span>
-        <span class="message-date">${messageObj.date}</span>
-      </div>
-      <div class="message-text">${messageObj.message}</div>
-    `;
-
-    messagesList.prepend(messageCard);
-  }
-
-  function saveMessage(messageObj) {
-    let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
-    messages.unshift(messageObj);
-
-    // Limit to 10 messages
-    if (messages.length > 10) {
-      messages = messages.slice(0, 10);
-    }
-
-    localStorage.setItem('contactMessages', JSON.stringify(messages));
-  }
-
-  function loadMessages() {
-    const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
-
-    messages.forEach(message => {
-      addMessageToDOM(message);
-    });
-  }
-
   // Load saved messages
   loadMessages();
 
