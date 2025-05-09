@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
     messageCard.innerHTML = `
       <div class="message-header">
         <span class="message-name">${messageObj.name}</span>
-        <span class="message-date">${messageObj.date}</span>
+        <span class="message-date">${messageObj.created_at ? new Date(messageObj.created_at).toLocaleString() : messageObj.date}</span>
       </div>
       <div class="message-text">${messageObj.message}</div>
     `;
@@ -95,7 +95,32 @@ document.addEventListener('DOMContentLoaded', function() {
     messagesList.prepend(messageCard);
   }
 
-  function saveMessage(messageObj) {
+  async function saveMessageToDB(messageObj) {
+    try {
+      const response = await fetch('/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: messageObj.name,
+          message: messageObj.message
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to save message');
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Error saving message to database:', error);
+      // Fallback ke localStorage jika database gagal
+      saveMessageToLocalStorage(messageObj);
+    }
+  }
+
+  function saveMessageToLocalStorage(messageObj) {
     let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
     messages.unshift(messageObj);
 
@@ -107,18 +132,41 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('contactMessages', JSON.stringify(messages));
   }
 
-  function loadMessages() {
-    const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+  async function loadMessagesFromDB() {
+    try {
+      // Kosongkan daftar pesan terlebih dahulu
+      messagesList.innerHTML = '';
+      
+      const response = await fetch('/api/messages');
+      if (!response.ok) {
+        throw new Error('Failed to fetch messages');
+      }
+      
+      const data = await response.json();
+      
+      if (data.messages && Array.isArray(data.messages)) {
+        data.messages.forEach(message => {
+          addMessageToDOM(message);
+        });
+      }
+    } catch (error) {
+      console.error('Error loading messages from database:', error);
+      // Fallback ke localStorage jika database gagal
+      loadMessagesFromLocalStorage();
+    }
+  }
 
+  function loadMessagesFromLocalStorage() {
+    const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
     messages.forEach(message => {
       addMessageToDOM(message);
     });
   }
 
-  // Load saved messages
-  loadMessages();
+  // Load messages from database
+  loadMessagesFromDB();
 
-  contactForm.addEventListener('submit', function(e) {
+  contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const nameInput = document.getElementById('name');
@@ -136,16 +184,18 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       try {
-        // Add message to DOM
-          addMessageToDOM(newMessage);
+        // Simpan pesan ke database
+        await saveMessageToDB(newMessage);
+        
+        // Add message to DOM untuk tampilan cepat
+        addMessageToDOM(newMessage);
 
-          // Clear form
-          nameInput.value = '';
-          messageInput.value = '';
+        // Clear form
+        nameInput.value = '';
+        messageInput.value = '';
 
-          // Reload messages from DB to sync with others
-          setTimeout(loadMessagesFromDB, 500);
-        }
+        // Reload messages from DB untuk mendapatkan ID dan timestamp yang tepat
+        setTimeout(loadMessagesFromDB, 500);
       } catch (error) {
         console.error('Error sending message:', error);
         alert('Error sending message. Please try again.');
