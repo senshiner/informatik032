@@ -259,6 +259,7 @@ nav ul li a:hover::after {
 
 [data-theme="dark"] .logo-circle {
   border-color: #00FFFF;
+  box-shadow: 0 8px 30px rgba(0, 255, 255, 0.8);
 }
 
 [data-theme="dark"] .logo-circle::after {
@@ -378,7 +379,7 @@ nav ul li a:hover::after {
   background-color: #fff;
   border-radius: 8px;
   padding: 0.75rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 20px rgba(0, 0, 128, 0.7);
   transition: all 0.3s ease;
   border: 2px solid #000080;
 }
