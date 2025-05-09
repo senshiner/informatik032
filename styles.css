@@ -241,6 +241,7 @@ nav ul li a:hover::after {
   background-color: #000080;
   position: relative;
   z-index: 2;
+  box-shadow: 0 8px 30px rgba(0, 0, 128, 0.8);
 }
 
 .logo-circle::after {
@@ -296,10 +297,12 @@ nav ul li a:hover::after {
   font-weight: 700;
   color: #000080;
   text-align: center;
+  text-shadow: 2px 2px 8px rgba(0, 0, 128, 0.5);
 }
 
 [data-theme="dark"] .motto {
   color: #00FFFF;
+  text-shadow: 2px 2px 8px rgba(0, 255, 255, 0.5);
 }
 
 /* Countdown Section */
@@ -314,7 +317,7 @@ nav ul li a:hover::after {
   background-color: #1a1a1a;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 128, 0.5);
+  box-shadow: 0 15px 40px rgba(0, 0, 128, 0.8);
   transition: background-color 0.3s ease;
   border: 2px solid #000080;
 }
@@ -328,7 +331,7 @@ nav ul li a:hover::after {
 
 [data-theme="dark"] .countdown-card {
   background-color: #1a1a1a;
-  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 255, 255, 0.4);
   border: 2px solid #00FFFF;
 }
 
@@ -375,14 +378,14 @@ nav ul li a:hover::after {
   background-color: #fff;
   border-radius: 8px;
   padding: 0.75rem;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
   transition: all 0.3s ease;
   border: 2px solid #000080;
 }
 
 [data-theme="dark"] .time-block {
   background-color: #222;
-  box-shadow: 0 6px 12px rgba(0, 255, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5);
   border: 2px solid #00FFFF;
 }
 
