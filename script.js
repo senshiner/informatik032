@@ -217,13 +217,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
-  
+
   // Gallery card hover-only functionality
   galleryCards.forEach(card => {
     card.addEventListener('mouseenter', function() {
       this.querySelector('.gallery-overlay').style.opacity = '1';
     });
-    
+
     card.addEventListener('mouseleave', function() {
       this.querySelector('.gallery-overlay').style.opacity = '0';
     });
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Show typing indicator
       const typingIndicator = document.createElement('div');
       typingIndicator.classList.add('ai-message', 'typing-indicator');
-      typingIndicator.innerHTML = '<p>AI is typing...</p>';
+      typingIndicator.innerHTML = '<p>Sedang mengetik...</p>';
       chatMessages.appendChild(typingIndicator);
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
