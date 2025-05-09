@@ -1407,7 +1407,9 @@ themeToggleBtn.addEventListener('click', () => {
 mobileNavToggle.addEventListener('click', () => {
   nav.classList.toggle('active');
   if (nav.classList.contains('active')) {
-    mobileNavToggle.innerHTML = '<i class="fas fa-times" style="color: #00FFFF;"></i>'; // Cyan X in light mode, will be navy in dark mode due to CSS
+    // Light mode: Cyan X, Dark mode: Navy blue X
+    const xColor = document.body.dataset.theme === "dark" ? "#000080" : "#00FFFF";
+    mobileNavToggle.innerHTML = `<i class="fas fa-times" style="color: ${xColor};"></i>`;
   } else {
     mobileNavToggle.innerHTML = '<i class="fas fa-bars"></i>';
   }
