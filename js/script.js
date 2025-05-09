@@ -186,7 +186,10 @@ document.addEventListener('DOMContentLoaded', function() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
     // Check for predefined responses first
-    const predefinedResponse = window.AIChat.checkForPredefinedResponse(message);
+    let predefinedResponse = null;
+    if (window.AIChat && typeof window.AIChat.checkForPredefinedResponse === 'function') {
+      predefinedResponse = window.AIChat.checkForPredefinedResponse(message);
+    }
     
     let aiResponse;
     

@@ -1,12 +1,14 @@
 
-// AI Chat predefined responses module
-// Created by: INFORMATIKA 032
-// Last updated: 2024
-
 /**
- * Map of predefined responses for common user inputs
- * Each key is a lowercase user input, and the value is the AI's response
+ * AI Chat predefined responses module
+ * Created by: INFORMATIKA 032
+ * Last updated: 2024
  */
+
+// Initialize window.AIChat object to avoid reference errors
+window.AIChat = {};
+
+// Map of predefined responses for common user inputs
 const predefinedResponses = {
   // Greetings
   "halo": "Halo! Ada yang bisa saya bantu?",
@@ -37,7 +39,7 @@ const predefinedResponses = {
   "bye": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja.",
   "goodbye": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja.",
   "dadah": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja.",
-  "selamat tinggal": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja.",
+  "selamat tinggal": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja."
 };
 
 /**
@@ -65,7 +67,7 @@ function checkForPredefinedResponse(message) {
   return null;
 }
 
-// Instead of ES module export, make it globally available
+// Make function available globally
 window.AIChat = {
   checkForPredefinedResponse: checkForPredefinedResponse
 };
