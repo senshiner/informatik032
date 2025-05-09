@@ -164,7 +164,7 @@ nav ul li a:hover::after {
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
-  color: #00FFFF; /* Cyan icon in light mode */
+  color: #000080; /* Navy blue icon in light mode */
   transition: transform 0.3s ease;
   position: relative;
   width: 40px;
@@ -174,7 +174,7 @@ nav ul li a:hover::after {
 }
 
 [data-theme="dark"] #theme-toggle-btn {
-  color: #000080; /* Navy blue icon in dark mode */
+  color: #00FFFF; /* Cyan icon in dark mode */
 }
 
 .mobile-nav-toggle {
@@ -582,7 +582,7 @@ nav ul li a:hover::after {
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #4a4a8b;
+  background-color: #fff;
   margin-bottom: 1rem;
   border: 2px solid #000080;
 }
