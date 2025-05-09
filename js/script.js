@@ -135,15 +135,21 @@ document.addEventListener('DOMContentLoaded', function() {
         date: new Date().toLocaleString()
       };
 
-      // Add to DOM
-      addMessageToDOM(newMessage);
+      try {
+        // Add message to DOM
+          addMessageToDOM(newMessage);
 
-      // Save to localStorage
-      saveMessage(newMessage);
+          // Clear form
+          nameInput.value = '';
+          messageInput.value = '';
 
-      // Clear form
-      nameInput.value = '';
-      messageInput.value = '';
+          // Reload messages from DB to sync with others
+          setTimeout(loadMessagesFromDB, 500);
+        }
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Error sending message. Please try again.');
+      }
     }
   });
 
