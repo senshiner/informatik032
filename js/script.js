@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Main JavaScript File
    Created by: INFORMATIKA 032
@@ -79,19 +78,19 @@ document.addEventListener('DOMContentLoaded', function() {
   // Contact form submission
   const contactForm = document.getElementById('contact-form');
   const messagesList = document.getElementById('messages-list');
-  
+
   // Load saved messages
   loadMessages();
-  
+
   contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    
+
     const nameInput = document.getElementById('name');
     const messageInput = document.getElementById('message');
-    
+
     const name = nameInput.value.trim();
     const message = messageInput.value.trim();
-    
+
     if (name && message) {
       // Create new message object
       const newMessage = {
@@ -99,13 +98,13 @@ document.addEventListener('DOMContentLoaded', function() {
         message: message,
         date: new Date().toLocaleString()
       };
-      
+
       // Add to DOM
       addMessageToDOM(newMessage);
-      
+
       // Save to localStorage
       saveMessage(newMessage);
-      
+
       // Clear form
       nameInput.value = '';
       messageInput.value = '';
@@ -115,17 +114,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // Gallery filtering
   const filterButtons = document.querySelectorAll('.filter-btn');
   const galleryCards = document.querySelectorAll('.gallery-card');
-  
+
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
       // Remove active class from all buttons
       filterButtons.forEach(btn => btn.classList.remove('active'));
-      
+
       // Add active class to clicked button
       button.classList.add('active');
-      
+
       const filter = button.getAttribute('data-filter');
-      
+
       galleryCards.forEach(card => {
         if (filter === 'all' || card.getAttribute('data-category') === filter) {
           card.style.display = 'block';
@@ -141,29 +140,29 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set the start date to September 9, 2024, 08:00 WIB
     const startDate = new Date('2024-09-09T08:00:00+07:00');
     const currentDate = new Date();
-    
+
     // Calculate the time passed since the start date
     const timeDifference = currentDate - startDate;
-    
+
     // Calculate days, hours, minutes, seconds
     let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-    
+
     // Format with leading zeros
     days = String(days).padStart(1, '0');
     hours = String(hours).padStart(2, '0');
     minutes = String(minutes).padStart(2, '0');
     seconds = String(seconds).padStart(2, '0');
-    
+
     // Update the DOM
     document.getElementById('days').textContent = days;
     document.getElementById('hours').textContent = hours;
     document.getElementById('minutes').textContent = minutes;
     document.getElementById('seconds').textContent = seconds;
   }
-  
+
   // Update the timer immediately and every second thereafter
   updateCountdown();
   setInterval(updateCountdown, 1000);
@@ -177,35 +176,35 @@ document.addEventListener('DOMContentLoaded', function() {
   const chatForm = document.getElementById('chat-form');
   const chatInput = document.getElementById('chat-input');
   const chatMessages = document.getElementById('chat-messages');
-  
+
   // Load chat history from localStorage
   loadChatHistory();
-  
+
   // Toggle chat box visibility
   chatToggle.addEventListener('click', () => {
     chatBox.classList.add('active');
   });
-  
+
   chatClose.addEventListener('click', () => {
     chatBox.classList.remove('active');
   });
-  
+
   // Handle chat form submission
   chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const message = chatInput.value.trim();
     if (!message) return;
-    
+
     // Add user message to chat
     const userMessageElement = document.createElement('div');
     userMessageElement.className = 'user-message';
     userMessageElement.innerHTML = `<p>You: ${message}</p>`;
     chatMessages.appendChild(userMessageElement);
-    
+
     // Clear input
     chatInput.value = '';
-    
+
     // Auto scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -214,22 +213,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.AIChat && typeof window.AIChat.checkForPredefinedResponse === 'function') {
       predefinedResponse = window.AIChat.checkForPredefinedResponse(message);
     }
-    
+
     let aiResponse;
-    
+
     if (predefinedResponse) {
       // Use the predefined response
       aiResponse = predefinedResponse;
-      
+
       // Add AI response to chat
       const aiMessageElement = document.createElement('div');
       aiMessageElement.className = 'ai-message';
       aiMessageElement.innerHTML = `<p>${aiResponse}</p>`;
       chatMessages.appendChild(aiMessageElement);
-      
+
       // Auto scroll to bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
-      
+
       // Save chat history
       saveChatMessage('user', `You: ${message}`);
       saveChatMessage('ai', aiResponse);
@@ -239,10 +238,10 @@ document.addEventListener('DOMContentLoaded', function() {
       typingIndicator.className = 'ai-message typing-indicator';
       typingIndicator.innerHTML = '<p>AI is typing</p>';
       chatMessages.appendChild(typingIndicator);
-      
+
       // Auto scroll to bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
-      
+
       try {
         // Send message to API
         const response = await fetch('/api/chat', {
@@ -252,36 +251,36 @@ document.addEventListener('DOMContentLoaded', function() {
           },
           body: JSON.stringify({ message })
         });
-        
+
         const data = await response.json();
         aiResponse = data.reply;
       } catch (error) {
         aiResponse = 'AI: Sorry, I encountered an error. Please try again later.';
       }
-      
+
       // Remove typing indicator
       chatMessages.removeChild(typingIndicator);
-      
+
       // Add AI response to chat
       const aiMessageElement = document.createElement('div');
       aiMessageElement.className = 'ai-message';
       aiMessageElement.innerHTML = `<p>${aiResponse}</p>`;
       chatMessages.appendChild(aiMessageElement);
-      
+
       // Auto scroll to bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
-      
+
       // Save chat history
       saveChatMessage('user', `You: ${message}`);
       saveChatMessage('ai', aiResponse);
     }
   });
-  
+
   // Functions for message history
   function addMessageToDOM(messageObj) {
     const messageCard = document.createElement('div');
     messageCard.className = 'message-card';
-    
+
     messageCard.innerHTML = `
       <div class="message-header">
         <span class="message-name">${messageObj.name}</span>
@@ -289,53 +288,55 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="message-text">${messageObj.message}</div>
     `;
-    
+
     messagesList.prepend(messageCard);
   }
-  
+
   function saveMessage(messageObj) {
     let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
     messages.unshift(messageObj);
-    
+
     // Limit to 10 messages
     if (messages.length > 10) {
       messages = messages.slice(0, 10);
     }
-    
+
     localStorage.setItem('contactMessages', JSON.stringify(messages));
   }
-  
+
   function loadMessages() {
     const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
-    
+
     messages.forEach(message => {
       addMessageToDOM(message);
     });
   }
-  
+
+  // Note: Functions already defined above - no need to redefine them
+
   // Functions for chat history
   function saveChatMessage(type, message) {
     let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
     chatHistory.push({ type, message });
-    
+
     // Limit to 50 messages
     if (chatHistory.length > 50) {
       chatHistory = chatHistory.slice(chatHistory.length - 50);
     }
-    
+
     localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
   }
-  
+
   function loadChatHistory() {
     const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-    
+
     chatHistory.forEach(item => {
       const messageElement = document.createElement('div');
       messageElement.className = item.type === 'user' ? 'user-message' : 'ai-message';
       messageElement.innerHTML = `<p>${item.message}</p>`;
       chatMessages.appendChild(messageElement);
     });
-    
+
     // Auto scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
