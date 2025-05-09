@@ -327,15 +327,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Countdown timer - Using fixed values per requirement
+  // Countdown timer - Calculate elapsed time since September 9, 2024
   function updateCountdown() {
-    // Set fixed values as shown in the design
-    document.getElementById('days').textContent = "241";
-    document.getElementById('hours').textContent = "06";
-    document.getElementById('minutes').textContent = "32";
-    document.getElementById('seconds').textContent = "13";
+    // Set the start date: September 9, 2024 08:00:00
+    const startDate = new Date('2024-09-09T08:00:00').getTime();
+    const now = new Date().getTime();
+    
+    // Calculate elapsed time (current time - start time)
+    const elapsedTime = now - startDate;
+    
+    // If the start date is in the future, show zeros
+    if (elapsedTime < 0) {
+      document.getElementById('days').textContent = "000";
+      document.getElementById('hours').textContent = "00";
+      document.getElementById('minutes').textContent = "00";
+      document.getElementById('seconds').textContent = "00";
+      return;
+    }
+    
+    // Calculate days, hours, minutes, seconds
+    const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+    
+    // Display the values
+    document.getElementById('days').textContent = days < 100 ? 
+      (days < 10 ? `00${days}` : `0${days}`) : days;
+    document.getElementById('hours').textContent = hours < 10 ? `0${hours}` : hours;
+    document.getElementById('minutes').textContent = minutes < 10 ? `0${minutes}` : minutes;
+    document.getElementById('seconds').textContent = seconds < 10 ? `0${seconds}` : seconds;
   }
 
-  // Initialize once
+  // Initialize and update every second
   updateCountdown();
+  setInterval(updateCountdown, 1000);
 });
