@@ -112,7 +112,7 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: #000000; /* Black text in light mode */
+  color: #8A2BE2; /* Black text in light mode */
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.3s ease;
@@ -120,7 +120,7 @@ nav ul li a {
 }
 
 [data-theme="dark"] nav ul li a {
-  color: #ffffff; /* White text in dark mode */
+  color: #8A2BE2; /* White text in dark mode */
 }
 
 nav ul li a::after {
@@ -130,7 +130,7 @@ nav ul li a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #8A2BE2; /* White underline in light mode */
+  background-color: #ffffff; /* White underline in light mode */
   transition: width 0.3s ease;
 }
 
