@@ -282,19 +282,12 @@ document.addEventListener('DOMContentLoaded', function() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
-  // Send message to API
+  // Import the predefined responses checker
+  import { checkForPredefinedResponse } from './ai-chat.js';
+
+  // Send message to API or use predefined response
   async function sendMessage(message) {
     try {
-      // Send message to FastURL API
-      const style = "You are a friendly AI assistant for the INFORMATIKA 032 website. Be friendly, informative, and engaging.";
-      const sessionId = localStorage.getItem('sessionId') || 'guest-' + Math.random().toString(36).substring(2, 10);
-
-      if (!localStorage.getItem('sessionId')) {
-        localStorage.setItem('sessionId', sessionId);
-      }
-
-      const apiUrl = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o?ask=${encodeURIComponent(message)}&style=${encodeURIComponent(style)}&sessionId=${encodeURIComponent(sessionId)}`;
-
       // Show typing indicator
       const typingIndicator = document.createElement('div');
       typingIndicator.classList.add('ai-message', 'typing-indicator');
@@ -302,8 +295,29 @@ document.addEventListener('DOMContentLoaded', function() {
       chatMessages.appendChild(typingIndicator);
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      const response = await axios.get(apiUrl);
-      const aiResponse = response.data.result || 'Maaf, saya tidak dapat memproses permintaan Anda saat ini.';
+      // Check for predefined responses first
+      const predefinedResponse = checkForPredefinedResponse(message);
+      
+      let aiResponse;
+      
+      if (predefinedResponse) {
+        // Use predefined response (simulate small typing delay)
+        await new Promise(resolve => setTimeout(resolve, 500));
+        aiResponse = predefinedResponse;
+      } else {
+        // No predefined response, send to API
+        const style = "You are a friendly AI assistant for the INFORMATIKA 032 website. Be friendly, informative, and engaging.";
+        const sessionId = localStorage.getItem('sessionId') || 'guest-' + Math.random().toString(36).substring(2, 10);
+
+        if (!localStorage.getItem('sessionId')) {
+          localStorage.setItem('sessionId', sessionId);
+        }
+
+        const apiUrl = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o?ask=${encodeURIComponent(message)}&style=${encodeURIComponent(style)}&sessionId=${encodeURIComponent(sessionId)}`;
+        
+        const response = await axios.get(apiUrl);
+        aiResponse = response.data.result || 'Maaf, saya tidak dapat memproses permintaan Anda saat ini.';
+      }
 
       // Remove typing indicator
       chatMessages.removeChild(typingIndicator);
