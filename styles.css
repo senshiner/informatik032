@@ -1161,23 +1161,23 @@ nav ul li a:hover::after {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid #000080; /* Navy border in light mode */
-  background-color: #000080; /* Navy background in light mode */
+  border-bottom: 1px solid #00FFFF; /* Cyan border in light mode */
+  background-color: #00FFFF; /* Cyan background in light mode */
 }
 
 [data-theme="dark"] .chat-header {
-  border-bottom: 1px solid #00FFFF; /* Cyan border in dark mode */
-  background-color: #00FFFF; /* Cyan background in dark mode */
+  border-bottom: 1px solid #000080; /* Navy border in dark mode */
+  background-color: #000080; /* Navy background in dark mode */
 }
 
 .chat-header h3 {
   margin: 0;
-  color: #ffffff; /* White text in light mode */
+  color: #000000; /* Black text in light mode */
   font-size: 1rem;
 }
 
 [data-theme="dark"] .chat-header h3 {
-  color: #000000; /* Black text in dark mode */
+  color: #ffffff; /* White text in dark mode */
 }
 
 .chat-close {
@@ -1407,8 +1407,8 @@ themeToggleBtn.addEventListener('click', () => {
 mobileNavToggle.addEventListener('click', () => {
   nav.classList.toggle('active');
   if (nav.classList.contains('active')) {
-    // Light mode: Cyan X, Dark mode: Navy blue X
-    const xColor = document.body.dataset.theme === "dark" ? "#000080" : "#00FFFF";
+    // Light mode: Black X, Dark mode: White X
+    const xColor = document.body.dataset.theme === "dark" ? "#FFFFFF" : "#000000";
     mobileNavToggle.innerHTML = `<i class="fas fa-times" style="color: ${xColor};"></i>`;
   } else {
     mobileNavToggle.innerHTML = '<i class="fas fa-bars"></i>';

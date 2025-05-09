@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
     nav.classList.toggle('active');
 
     if (nav.classList.contains('active')) {
-      // Light mode: Cyan X, Dark mode: Navy blue X
+      // Light mode: Black X, Dark mode: White X
       const currentTheme = document.documentElement.getAttribute('data-theme');
-      const xColor = currentTheme === 'dark' ? '#000080' : '#00FFFF';
+      const xColor = currentTheme === 'dark' ? '#FFFFFF' : '#000000';
       mobileNavToggle.innerHTML = `<i class="fas fa-times" style="color: ${xColor};"></i>`;
     } else {
       mobileNavToggle.innerHTML = '<i class="fas fa-bars"></i>';
