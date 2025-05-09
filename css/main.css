@@ -1,0 +1,44 @@
+
+/* ==========================================================================
+   Main CSS File
+   This file imports all the modular CSS components
+   Created by: INFORMATIKA 032
+   Last updated: 2024
+   ========================================================================== */
+
+/* Base styles */
+@import 'base/reset.css';
+@import 'themes/colors.css';
+@import 'base/typography.css';
+
+/* Layout components */
+@import 'layout/header.css';
+@import 'layout/footer.css';
+
+/* UI Components */
+@import 'components/hero.css';
+@import 'components/countdown.css';
+@import 'components/sections.css';
+
+/* Utilities */
+@import 'utils/responsive.css';
+
+/* Theme toggle JavaScript */
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+const nav = document.querySelector('nav');
+
+themeToggleBtn.addEventListener('click', () => {
+  document.body.dataset.theme = document.body.dataset.theme === "dark" ? "light" : "dark";
+});
+
+mobileNavToggle.addEventListener('click', () => {
+  nav.classList.toggle('active');
+  if (nav.classList.contains('active')) {
+    // Light mode: Black X, Dark mode: White X
+    const xColor = document.body.dataset.theme === "dark" ? "#FFFFFF" : "#000000";
+    mobileNavToggle.innerHTML = `<i class="fas fa-times" style="color: ${xColor};"></i>`;
+  } else {
+    mobileNavToggle.innerHTML = '<i class="fas fa-bars"></i>';
+  }
+});
