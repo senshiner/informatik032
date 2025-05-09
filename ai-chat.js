@@ -52,5 +52,7 @@ function checkForPredefinedResponse(message) {
   return null;
 }
 
-// Export the check function to use in main script
-export { checkForPredefinedResponse };
+// Instead of ES module export, make it globally available
+window.AIChat = {
+  checkForPredefinedResponse: checkForPredefinedResponse
+};

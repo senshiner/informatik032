@@ -282,9 +282,6 @@ document.addEventListener('DOMContentLoaded', function() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
-  // Import the predefined responses checker
-  import { checkForPredefinedResponse } from './ai-chat.js';
-
   // Send message to API or use predefined response
   async function sendMessage(message) {
     try {
@@ -296,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
       // Check for predefined responses first
-      const predefinedResponse = checkForPredefinedResponse(message);
+      const predefinedResponse = window.AIChat.checkForPredefinedResponse(message);
       
       let aiResponse;
       
