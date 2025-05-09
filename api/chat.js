@@ -1,4 +1,8 @@
 
+/**
+ * Simple AI chat response API
+ */
+
 module.exports = async (req, res) => {
     try {
         console.log("API Chat Request:", req.body);
@@ -10,30 +14,47 @@ module.exports = async (req, res) => {
             });
         }
         
-        const response = await fetch('https://fastrestapis.fasturl.cloud/aillm/gpt-4o', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.API_KEY}`
-            },
-            body: JSON.stringify(req.body)
-        });
+        // Predefined responses for simple AI chat
+        const predefinedResponses = {
+            "halo": "Halo! Ada yang bisa saya bantu?",
+            "hi": "Hi there! How can I help you today?",
+            "hello": "Hello! How can I assist you?",
+            "informatika": "Informatika adalah program studi yang mempelajari tentang pemrosesan informasi dengan bantuan komputer.",
+            "pamulang": "Universitas Pamulang adalah salah satu perguruan tinggi swasta yang terletak di Tangerang Selatan, Banten.",
+            "website": "Website ini dibuat oleh mahasiswa Informatika 032 dari Universitas Pamulang sebagai platform untuk berbagi informasi.",
+            "kuliah": "Kuliah di Teknik Informatika mempelajari berbagai aspek teknologi seperti pemrograman, basis data, jaringan, dan kecerdasan buatan.",
+            "program": "Kami memiliki berbagai program studi seperti Informatika, Sistem Informasi, dan Teknologi Informasi."
+        };
         
-        if (!response.ok) {
-            console.error('API Error:', response.status, response.statusText);
-            throw new Error(`API responded with status: ${response.status}`);
+        const message = req.body.message.toLowerCase();
+        let reply = 'AI: Maaf, saya belum dilatih untuk menjawab pertanyaan ini. Silakan tanyakan hal lain atau hubungi admin.';
+        
+        // Check if any predefined response matches
+        for (const key in predefinedResponses) {
+            if (message.includes(key)) {
+                reply = 'AI: ' + predefinedResponses[key];
+                break;
+            }
         }
         
-        const data = await response.json();
-        console.log("API Response:", data);
+        // Add some randomness for more natural responses
+        const greetings = [
+            "Hai! Ada yang bisa saya bantu?",
+            "Hello! How can I assist you today?",
+            "Halo! Apa kabar? Ada yang bisa saya bantu?",
+            "Hi there! What can I do for you?"
+        ];
         
-        res.status(200).json({ 
-            reply: data.reply || 'AI: Halo, apa kabar?' 
-        });
+        if (message.match(/^(hi|hello|halo|hai|hey|salam).*/i)) {
+            const randomIndex = Math.floor(Math.random() * greetings.length);
+            reply = 'AI: ' + greetings[randomIndex];
+        }
+        
+        res.status(200).json({ reply });
     } catch (error) {
         console.error('AI Chat Error:', error.message);
         res.status(500).json({ 
-            reply: 'AI: Maaf, terjadi kesalahan saat menghubungi layanan AI. Silakan coba lagi nanti.' 
+            reply: 'AI: Maaf, terjadi kesalahan. Silakan coba lagi nanti.' 
         });
     }
 };

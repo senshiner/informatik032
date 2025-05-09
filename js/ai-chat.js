@@ -6,7 +6,7 @@
  */
 
 // Initialize window.AIChat object to avoid reference errors
-window.AIChat = {};
+window.AIChat = window.AIChat || {};
 
 // Map of predefined responses for common user inputs
 const predefinedResponses = {

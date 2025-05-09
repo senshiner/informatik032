@@ -1,20 +1,19 @@
-
 // Theme toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   const body = document.body;
-  
+
   // Check for saved theme preference
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
     body.setAttribute('data-theme', savedTheme);
   }
-  
+
   // Handle theme toggle click
   themeToggleBtn.addEventListener('click', function() {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
+
     body.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
   });
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Mobile navigation toggle
   const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
   const nav = document.querySelector('nav');
-  
+
   mobileNavToggle.addEventListener('click', function() {
     nav.classList.toggle('active');
     this.classList.toggle('active');
@@ -30,19 +29,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Smooth scrolling for navigation links
   const navLinks = document.querySelectorAll('nav a');
-  
+
   navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      
+
       const targetId = this.getAttribute('href');
       const targetSection = document.querySelector(targetId);
-      
+
       window.scrollTo({
         top: targetSection.offsetTop - 70,
         behavior: 'smooth'
       });
-      
+
       // Close mobile nav if open
       nav.classList.remove('active');
       mobileNavToggle.classList.remove('active');
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Scroll to top button
   const scrollToTopBtn = document.getElementById('scroll-to-top');
-  
+
   window.addEventListener('scroll', function() {
     if (window.pageYOffset > 300) {
       scrollToTopBtn.classList.add('show');
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
       scrollToTopBtn.classList.remove('show');
     }
   });
-  
+
   scrollToTopBtn.addEventListener('click', function() {
     window.scrollTo({
       top: 0,
@@ -70,17 +69,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // Gallery filtering
   const filterButtons = document.querySelectorAll('.filter-btn');
   const galleryCards = document.querySelectorAll('.gallery-card');
-  
+
   filterButtons.forEach(button => {
     button.addEventListener('click', function() {
       // Remove active class from all buttons
       filterButtons.forEach(btn => btn.classList.remove('active'));
-      
+
       // Add active class to clicked button
       this.classList.add('active');
-      
+
       const filter = this.getAttribute('data-filter');
-      
+
       // Show/hide gallery cards based on filter
       galleryCards.forEach(card => {
         if (filter === 'all' || card.getAttribute('data-category') === filter) {
@@ -95,16 +94,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Contact form submission
   const contactForm = document.getElementById('contact-form');
   const messagesList = document.getElementById('messages-list');
-  
+
   contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const nameInput = document.getElementById('name');
     const messageInput = document.getElementById('message');
-    
+
     const name = nameInput.value.trim();
     const message = messageInput.value.trim();
-    
+
     if (name && message) {
       const newMessage = {
         name: name,
@@ -115,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
       try {
         // Simpan pesan ke database
         await saveMessageToDB(newMessage);
-        
+
         // Add message to DOM untuk tampilan cepat
         addMessageToDOM(newMessage);
 
@@ -160,11 +159,11 @@ document.addEventListener('DOMContentLoaded', function() {
           message: messageObj.message
         })
       });
-      
+
       if (!response.ok) {
         throw new Error('Failed to save message');
       }
-      
+
       return await response.json();
     } catch (error) {
       console.error('Error saving message to database:', error);
@@ -189,14 +188,14 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       // Kosongkan daftar pesan terlebih dahulu
       messagesList.innerHTML = '';
-      
+
       const response = await fetch('/api/messages');
       if (!response.ok) {
         throw new Error('Failed to fetch messages');
       }
-      
+
       const data = await response.json();
-      
+
       if (data.messages && Array.isArray(data.messages)) {
         data.messages.forEach(message => {
           addMessageToDOM(message);
@@ -261,143 +260,115 @@ document.addEventListener('DOMContentLoaded', function() {
   const chatInput = document.getElementById('chat-input');
   const chatMessages = document.getElementById('chat-messages');
 
-  // Load chat history from localStorage
-  loadChatHistory();
-
-  // Toggle chat box visibility
+  // Toggle chat box
   chatToggle.addEventListener('click', () => {
-    chatBox.classList.add('active');
+    chatBox.classList.toggle('active');
+    // Load chat history when opening chat
+    if (chatBox.classList.contains('active')) {
+      loadChatHistory();
+    }
   });
 
+  // Close chat box
   chatClose.addEventListener('click', () => {
     chatBox.classList.remove('active');
   });
 
-  // Handle chat form submission
+  // Send message
   chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const message = chatInput.value.trim();
-    if (!message) return;
+    if (message === '') return;
 
-    // Add user message to chat
+    // Clear input
+    chatInput.value = '';
+
+    // Display user message
     const userMessageElement = document.createElement('div');
     userMessageElement.className = 'user-message';
     userMessageElement.innerHTML = `<p>You: ${message}</p>`;
     chatMessages.appendChild(userMessageElement);
 
-    // Clear input
-    chatInput.value = '';
-
-    // Auto scroll to bottom
+    // Scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // Check for predefined responses first
-    let predefinedResponse = null;
-    if (window.AIChat && typeof window.AIChat.checkForPredefinedResponse === 'function') {
-      predefinedResponse = window.AIChat.checkForPredefinedResponse(message);
-    }
-
-    let aiResponse;
+    // Check for predefined response first
+    const predefinedResponse = window.AIChat && window.AIChat.checkForPredefinedResponse ? 
+      window.AIChat.checkForPredefinedResponse(message) : null;
 
     if (predefinedResponse) {
-      // Use the predefined response
-      aiResponse = predefinedResponse;
+      // Display AI response (with typing effect)
+      setTimeout(() => {
+        const aiMessageElement = document.createElement('div');
+        aiMessageElement.className = 'ai-message';
+        aiMessageElement.innerHTML = `<p>AI: ${predefinedResponse}</p>`;
+        chatMessages.appendChild(aiMessageElement);
 
-      // Add AI response to chat
-      const aiMessageElement = document.createElement('div');
-      aiMessageElement.className = 'ai-message';
-      aiMessageElement.innerHTML = `<p>${aiResponse}</p>`;
-      chatMessages.appendChild(aiMessageElement);
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      // Auto scroll to bottom
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      // Save chat history
-      saveChatMessage('user', `You: ${message}`);
-      saveChatMessage('ai', aiResponse);
+        // Save chat history
+        saveChatMessage('user', `You: ${message}`);
+        saveChatMessage('ai', `AI: ${predefinedResponse}`);
+      }, 500);
     } else {
-      // Show typing indicator
+      // Add typing indicator
       const typingIndicator = document.createElement('div');
-      typingIndicator.className = 'ai-message typing-indicator';
-      typingIndicator.innerHTML = '<p>AI is typing</p>';
+      typingIndicator.className = 'typing-indicator';
+      typingIndicator.innerHTML = '<p>AI is typing...</p>';
       chatMessages.appendChild(typingIndicator);
 
-      // Auto scroll to bottom
+      // Scroll to bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
       try {
-        // Send message to API
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ message })
-        });
+        // Use simple fallback when API is not available
+        setTimeout(() => {
+          // Remove typing indicator
+          chatMessages.removeChild(typingIndicator);
 
-        const data = await response.json();
-        aiResponse = data.reply;
+          // Display generic AI response
+          const aiResponse = 'AI: Maaf, saya belum dilatih untuk menjawab pertanyaan ini. Silakan tanyakan hal lain atau hubungi admin.';
+          const aiMessageElement = document.createElement('div');
+          aiMessageElement.className = 'ai-message';
+          aiMessageElement.innerHTML = `<p>${aiResponse}</p>`;
+          chatMessages.appendChild(aiMessageElement);
 
-        // Remove typing indicator
-        chatMessages.removeChild(typingIndicator);
+          // Scroll to bottom
+          chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // Add AI response to chat
-        const aiMessageElement = document.createElement('div');
-        aiMessageElement.className = 'ai-message';
-        aiMessageElement.innerHTML = `<p>${aiResponse}</p>`;
-        chatMessages.appendChild(aiMessageElement);
-
-        // Auto scroll to bottom
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+          // Save chat history
+          saveChatMessage('user', `You: ${message}`);
+          saveChatMessage('ai', aiResponse);
+        }, 1000);
 
         // Save chat history
         saveChatMessage('user', `You: ${message}`);
         saveChatMessage('ai', aiResponse);
       } catch (error) {
         console.error('Error sending message:', error);
-        
-        // Remove typing indicator
-        chatMessages.removeChild(typingIndicator);
-        
-        // Show error message
-        aiResponse = 'AI: Sorry, I encountered an error. Please try again later.';
-        const aiMessageElement = document.createElement('div');
-        aiMessageElement.className = 'ai-message';
-        aiMessageElement.innerHTML = `<p>${aiResponse}</p>`;
-        chatMessages.appendChild(aiMessageElement);
-        
-        // Save chat history
-        saveChatMessage('user', `You: ${message}`);
-        saveChatMessage('ai', aiResponse);
       }
     }
   });
 
-  // Functions for chat history
+  // Save chat message
   function saveChatMessage(type, message) {
     let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
     chatHistory.push({ type, message });
-
-    // Limit to 50 messages
-    if (chatHistory.length > 50) {
-      chatHistory = chatHistory.slice(chatHistory.length - 50);
-    }
-
     localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
   }
 
+  // Load chat history
   function loadChatHistory() {
-    const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-
-    chatHistory.forEach(item => {
+    chatMessages.innerHTML = '';
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    chatHistory.forEach(chat => {
       const messageElement = document.createElement('div');
-      messageElement.className = item.type === 'user' ? 'user-message' : 'ai-message';
-      messageElement.innerHTML = `<p>${item.message}</p>`;
+      messageElement.className = chat.type === 'user' ? 'user-message' : 'ai-message';
+      messageElement.innerHTML = `<p>${chat.message}</p>`;
       chatMessages.appendChild(messageElement);
     });
-
-    // Auto scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 });
