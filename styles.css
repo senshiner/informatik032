@@ -143,11 +143,11 @@ nav ul li a:hover::after {
 }
 
 nav ul li a:hover {
-  color: #555555; /* Dark gray hover in light mode */
+  color: #dddddd; /* Dark gray hover in light mode */
 }
 
 [data-theme="dark"] nav ul li a:hover {
-  color: #dddddd; /* Light gray hover in dark mode */
+  color: #555555; /* Light gray hover in dark mode */
 }
 
 nav ul li a:hover::after {
