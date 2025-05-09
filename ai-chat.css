@@ -1,0 +1,296 @@
+
+/* ==========================================================================
+   AI Chat Styles
+   ========================================================================== */
+
+/* This file contains all styles related to the AI chat functionality
+   Created by: INFORMATIKA 032
+   Last updated: 2024
+*/
+
+/* ==========================================================================
+   Chat Container
+   ========================================================================== */
+
+.chat-container {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 1000;
+}
+
+/* Chat Toggle Button */
+.chat-toggle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #00FFFF; /* Cyan for light mode */
+  color: #000000; /* Black text in light mode */
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3); /* Cyan shadow in light mode */
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1001;
+}
+
+[data-theme="dark"] .chat-toggle {
+  background-color: #000080; /* Navy blue for dark mode */
+  color: #ffffff; /* White text in dark mode */
+  box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3); /* Navy shadow in dark mode */
+}
+
+/* Chat Toggle Animation */
+.chat-toggle::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #00FFFF; /* Cyan ripple in light mode */
+  opacity: 0.5;
+  transform: scale(0);
+  animation: ripple 1.5s infinite;
+}
+
+[data-theme="dark"] .chat-toggle::after {
+  background-color: #000080; /* Navy blue ripple in dark mode */
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Chat Box
+   ========================================================================== */
+
+.chat-box {
+  position: absolute;
+  right: 0;
+  bottom: 80px;
+  width: 300px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 15px 40px rgba(0, 0, 128, 0.5);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.chat-box.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+[data-theme="dark"] .chat-box {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+}
+
+/* Chat Header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #00FFFF; /* Cyan border in light mode */
+  background-color: #00FFFF; /* Cyan background in light mode */
+}
+
+[data-theme="dark"] .chat-header {
+  border-bottom: 1px solid #000080; /* Navy border in dark mode */
+  background-color: #000080; /* Navy background in dark mode */
+}
+
+.chat-header h3 {
+  margin: 0;
+  color: #000000; /* Black text in light mode */
+  font-size: 1rem;
+}
+
+[data-theme="dark"] .chat-header h3 {
+  color: #ffffff; /* White text in dark mode */
+}
+
+/* Close Button */
+.chat-close {
+  background: none;
+  border: none;
+  color: #000000; /* Black icon in light mode */
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .chat-close {
+  color: #FFFFFF; /* White icon in dark mode */
+}
+
+.chat-close:hover {
+  transform: rotate(90deg);
+}
+
+/* ==========================================================================
+   Chat Messages
+   ========================================================================== */
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: rgba(255, 255, 255, 0.7); /* Light background for light mode */
+}
+
+[data-theme="dark"] .chat-messages {
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background for dark mode */
+}
+
+/* User and AI Message Styles */
+.user-message,
+.ai-message {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #00FFFF; /* Cyan for light mode */
+  color: #000000; /* Black text in light mode */
+  font-weight: 700;
+}
+
+[data-theme="dark"] .user-message {
+  background-color: #000080; /* Navy blue for dark mode */
+  color: #ffffff; /* White text in dark mode */
+}
+
+.ai-message {
+  align-self: flex-start;
+  background-color: rgba(0, 0, 128, 0.1); /* Light navy background in light mode */
+  border: 1px solid rgba(0, 0, 128, 0.5); /* Navy border in light mode */
+  font-style: italic;
+  color: #333333; /* Dark text in light mode */
+}
+
+[data-theme="dark"] .ai-message {
+  background-color: rgba(0, 255, 255, 0.1); /* Light cyan background in dark mode */
+  border: 1px solid rgba(0, 255, 255, 0.5); /* Cyan border in dark mode */
+  color: #f1f1f1; /* Light text in dark mode */
+}
+
+.user-message p,
+.ai-message p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Typing Indicator */
+.typing-indicator p {
+  display: flex;
+  align-items: center;
+}
+
+.typing-indicator p::after {
+  content: "...";
+  animation: typing 1.5s infinite;
+  margin-left: 2px;
+}
+
+@keyframes typing {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* ==========================================================================
+   Chat Form
+   ========================================================================== */
+
+.chat-form {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid #00FFFF; /* Cyan border in light mode */
+  background-color: rgba(255, 255, 255, 0.7); /* Light background for light mode */
+}
+
+[data-theme="dark"] .chat-form {
+  border-top: 1px solid #000080; /* Navy border in dark mode */
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background for dark mode */
+}
+
+.chat-form input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+  font-family: 'Roboto Mono', monospace;
+}
+
+.chat-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.chat-form button {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chat-form button:hover {
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .chat-box {
+    width: 280px;
+    right: -10px;
+  }
+
+  .chat-toggle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}

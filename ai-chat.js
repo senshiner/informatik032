@@ -1,14 +1,5 @@
 
-/**
- * AI Chat predefined responses module
- * Created by: INFORMATIKA 032
- * Last updated: 2024
- */
-
-// Initialize window.AIChat object to avoid reference errors
-window.AIChat = {};
-
-// Map of predefined responses for common user inputs
+// Predefined responses for common questions
 const predefinedResponses = {
   // Greetings
   "halo": "Halo! Ada yang bisa saya bantu?",
@@ -37,37 +28,31 @@ const predefinedResponses = {
   
   // Farewells
   "bye": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja.",
-  "goodbye": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja.",
-  "dadah": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja.",
   "selamat tinggal": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja."
 };
 
-/**
- * Checks if a user message has a predefined response
- * @param {string} message - The user's message
- * @returns {string|null} - The predefined response or null if none found
- */
+// Function to check if the message matches any predefined response patterns
 function checkForPredefinedResponse(message) {
   // Convert message to lowercase for case-insensitive matching
-  const normalizedMessage = message.toLowerCase().trim();
+  const lowerMessage = message.toLowerCase().trim();
   
-  // Direct match
-  if (predefinedResponses[normalizedMessage]) {
-    return predefinedResponses[normalizedMessage];
+  // Check exact matches first
+  if (predefinedResponses[lowerMessage]) {
+    return predefinedResponses[lowerMessage];
   }
   
-  // Partial match (if message contains a key)
-  for (const key in predefinedResponses) {
-    if (normalizedMessage.includes(key)) {
-      return predefinedResponses[key];
+  // Check for partial matches (if the message contains a key phrase)
+  for (const [key, response] of Object.entries(predefinedResponses)) {
+    if (lowerMessage.includes(key)) {
+      return response;
     }
   }
   
-  // No match found
+  // No predefined response found
   return null;
 }
 
-// Make function available globally
+// Instead of ES module export, make it globally available
 window.AIChat = {
   checkForPredefinedResponse: checkForPredefinedResponse
 };
