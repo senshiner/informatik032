@@ -216,7 +216,7 @@ nav ul li a:hover::after {
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  border: 5px solid #333;
+  border: 5px solid #000080;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -232,7 +232,7 @@ nav ul li a:hover::after {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 5px solid #333;
+  border: 5px solid #000080;
   top: -5px;
   left: -5px;
   animation: pulse 1.5s infinite;
@@ -240,11 +240,11 @@ nav ul li a:hover::after {
 }
 
 [data-theme="dark"] .logo-circle {
-  border-color: #444;
+  border-color: #00FFFF;
 }
 
 [data-theme="dark"] .logo-circle::after {
-  border-color: #444;
+  border-color: #00FFFF;
 }
 
 .hero-logo {
@@ -385,7 +385,7 @@ nav ul li a:hover::after {
 
 .time-label {
   font-size: 0.9rem;
-  color: #aaa;
+  color: #000080;
   letter-spacing: 1px;
 }
 
