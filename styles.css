@@ -112,7 +112,8 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: #8A2BE2; /* Black text in light mode */
+  background-color: #000;
+  color: #00FFFF; /* Black text in light mode */
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.3s ease;
@@ -120,7 +121,8 @@ nav ul li a {
 }
 
 [data-theme="dark"] nav ul li a {
-  color: #8A2BE2; /* White text in dark mode */
+  color: #000080; /* White text in dark mode */
+  background-color: #fff;
 }
 
 nav ul li a::after {
@@ -143,11 +145,11 @@ nav ul li a:hover::after {
 }
 
 nav ul li a:hover {
-  color: #dddddd; /* Dark gray hover in light mode */
+  color: #555555; /* Dark gray hover in light mode */
 }
 
 [data-theme="dark"] nav ul li a:hover {
-  color: #555555; /* Light gray hover in dark mode */
+  color: #dddddd; /* Light gray hover in dark mode */
 }
 
 nav ul li a:hover::after {
