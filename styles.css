@@ -294,11 +294,18 @@ nav ul li a:hover::after {
 .countdown-card {
   width: 100%;
   max-width: 600px;
-  background-color: #fff;
+  background-color: #1a1a1a;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 128, 0.2);
   transition: background-color 0.3s ease;
+  border: 2px solid #000080;
+}
+
+[data-theme="light"] .countdown-card {
+  background-color: #fff;
+  color: #000080;
+  box-shadow: 0 8px 25px rgba(0, 0, 128, 0.2);
   border: 2px solid #000080;
 }
 
@@ -470,7 +477,7 @@ nav ul li a:hover::after {
 .about-card {
   max-width: 800px;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: #1a1a1a;
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 128, 0.3);
   backdrop-filter: blur(4px);
@@ -479,8 +486,15 @@ nav ul li a:hover::after {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+[data-theme="light"] .about-card {
+  background-color: #fff;
+  color: #000080;
+  border: 2px solid #000080;
+  box-shadow: 0 8px 32px rgba(0, 0, 128, 0.3);
+}
+
 [data-theme="dark"] .about-card {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #1a1a1a;
   border: 2px solid #00FFFF;
   box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
 }
@@ -600,11 +614,12 @@ nav ul li a:hover::after {
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
   opacity: 0;
   transition: all 0.4s ease;
   cursor: pointer;
+  padding: 20px;
 }
 
 .gallery-card:hover .gallery-overlay,
@@ -619,9 +634,10 @@ nav ul li a:hover::after {
   font-family: 'Roboto Mono', monospace;
   font-weight: 700;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  transform: translateY(-20px);
+  transform: translateY(10px);
   opacity: 0;
   transition: all 0.4s ease 0.1s;
+  text-align: left;
 }
 
 .gallery-card:hover .gallery-title,
@@ -743,7 +759,7 @@ nav ul li a:hover::after {
 }
 
 .app-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: #1a1a1a;
   border-radius: 15px;
   padding: 2rem;
   text-align: center;
@@ -753,7 +769,15 @@ nav ul li a:hover::after {
   backdrop-filter: blur(10px);
 }
 
+[data-theme="light"] .app-card {
+  background-color: #fff;
+  color: #000080;
+  border: 2px solid #000080;
+  box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3);
+}
+
 [data-theme="dark"] .app-card {
+  background-color: #1a1a1a;
   border: 2px solid #00FFFF;
   box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
 }
@@ -909,7 +933,7 @@ nav ul li a:hover::after {
 }
 
 .messages-container {
-  background: rgba(255, 255, 255, 0.05);
+  background: #1a1a1a;
   border-radius: 15px;
   padding: 1.5rem;
   border: 2px solid #000080;
@@ -917,7 +941,15 @@ nav ul li a:hover::after {
   backdrop-filter: blur(5px);
 }
 
+[data-theme="light"] .messages-container {
+  background-color: #fff;
+  color: #000080;
+  border: 2px solid #000080;
+  box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3);
+}
+
 [data-theme="dark"] .messages-container {
+  background-color: #1a1a1a;
   border: 2px solid #00FFFF;
   box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
 }
