@@ -116,7 +116,7 @@ nav ul li a {
   color: #00FFFF; /* Black text in light mode */
   border: 1px solid;
   border-radius: 5px;
-  padding: 2px;
+  padding: 3px;
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.3s ease;
