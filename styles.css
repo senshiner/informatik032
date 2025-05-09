@@ -164,7 +164,7 @@ nav ul li a:hover::after {
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
-  color: #000000; /* Black icon in light mode */
+  color: #00FFFF; /* Cyan icon in light mode */
   transition: transform 0.3s ease;
   position: relative;
   width: 40px;
@@ -174,48 +174,18 @@ nav ul li a:hover::after {
 }
 
 [data-theme="dark"] #theme-toggle-btn {
-  color: #ffffff; /* White icon in dark mode */
-}
-
-#theme-toggle-btn:hover {
-  transform: rotate(15deg);
-}
-
-#theme-toggle-btn .fa-sun {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-#theme-toggle-btn .fa-moon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-[data-theme="dark"] #theme-toggle-btn .fa-sun {
-  opacity: 0;
-}
-
-[data-theme="dark"] #theme-toggle-btn .fa-moon {
-  opacity: 1;
+  color: #000080; /* Navy blue icon in dark mode */
 }
 
 .mobile-nav-toggle {
   display: none;
   cursor: pointer;
   font-size: 1.5rem;
-  color: #ffffff; /* White icon in light mode */
+  color: #00FFFF; /* Cyan icon in light mode */
 }
 
 [data-theme="dark"] .mobile-nav-toggle {
-  color: #000000; /* Black icon in dark mode */
+  color: #000080; /* Navy blue icon in dark mode */
 }
 
 /* Hero Section */
@@ -1105,28 +1075,24 @@ nav ul li a:hover::after {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #000080; /* Navy blue for light mode */
-  color: #ffffff; /* White text in light mode */
+  background-color: #00FFFF; /* Cyan for light mode */
+  color: #000000; /* Black text in light mode */
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3); /* Navy shadow in light mode */
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3); /* Cyan shadow in light mode */
   transition: all 0.3s ease;
   position: relative;
   z-index: 1001;
 }
 
 [data-theme="dark"] .chat-toggle {
-  background-color: #00FFFF; /* Cyan for dark mode */
-  color: #000000; /* Black text in dark mode */
-  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3); /* Cyan shadow in dark mode */
-}
-
-.chat-toggle:hover {
-  transform: scale(1.1);
+  background-color: #000080; /* Navy blue for dark mode */
+  color: #ffffff; /* White text in dark mode */
+  box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3); /* Navy shadow in dark mode */
 }
 
 .chat-toggle::after {
@@ -1135,25 +1101,14 @@ nav ul li a:hover::after {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #000080; /* Navy blue ripple in light mode */
+  background-color: #00FFFF; /* Cyan ripple in light mode */
   opacity: 0.5;
   transform: scale(0);
   animation: ripple 1.5s infinite;
 }
 
 [data-theme="dark"] .chat-toggle::after {
-  background-color: #00FFFF; /* Cyan ripple in dark mode */
-}
-
-@keyframes ripple {
-  0% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
+  background-color: #000080; /* Navy blue ripple in dark mode */
 }
 
 .chat-box {
