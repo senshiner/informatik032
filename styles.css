@@ -82,16 +82,24 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 5%;
-  background-color: var(--background-color);
+  background-color: #000080; /* Navy blue for light mode */
   box-shadow: 0 2px 10px var(--shadow-color);
   z-index: 1000;
   transition: all 0.3s ease;
 }
 
+[data-theme="dark"] header {
+  background-color: #00FFFF; /* Cyan for dark mode */
+}
+
 .logo h1 {
   font-size: 1.5rem;
-  color: var(--primary-color);
+  color: #ffffff; /* White text for navy background */
   margin: 0;
+}
+
+[data-theme="dark"] .logo h1 {
+  color: #000000; /* Black text for cyan background */
 }
 
 nav ul {
@@ -105,11 +113,15 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: var(--text-color);
+  color: #ffffff; /* White text for navy background */
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.3s ease;
   position: relative;
+}
+
+[data-theme="dark"] nav ul li a {
+  color: #000000; /* Black text for cyan background */
 }
 
 nav ul li a::after {
@@ -119,12 +131,20 @@ nav ul li a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: var(--primary-color);
+  background-color: #ffffff; /* White underline in light mode */
   transition: width 0.3s ease;
 }
 
+[data-theme="dark"] nav ul li a::after {
+  background-color: #000000; /* Black underline in dark mode */
+}
+
 nav ul li a:hover {
-  color: var(--primary-color);
+  color: #f5f5f5; /* Light gray hover in light mode */
+}
+
+[data-theme="dark"] nav ul li a:hover {
+  color: #222222; /* Dark gray hover in dark mode */
 }
 
 nav ul li a:hover::after {
@@ -527,15 +547,20 @@ nav ul li a:hover::after {
 
 .gallery .section-title {
   color: var(--primary-color);
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 700;
-  letter-spacing: 2px;
 }
 
 .gallery .section-title::after {
-  height: 4px;
-  width: 80px;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
   background: var(--primary-color);
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
 }
 
 .gallery-filter {
@@ -1009,15 +1034,24 @@ nav ul li a:hover::after {
 .footer {
   padding: 2rem 0;
   text-align: center;
-  background-color: var(--background-color);
-  border-top: 1px solid var(--border-color);
+  background-color: #000080; /* Navy blue for light mode */
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
 }
 
+[data-theme="dark"] .footer {
+  background-color: #00FFFF; /* Cyan for dark mode */
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
 .footer p {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 700;
-  color: var(--primary-color);
+  color: #ffffff; /* White text in light mode */
+}
+
+[data-theme="dark"] .footer p {
+  color: #000000; /* Black text in dark mode */
 }
 
 .scroll-to-top {
@@ -1028,14 +1062,19 @@ nav ul li a:hover::after {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--primary-color);
-  color: var(--background-color);
+  background-color: #ffffff; /* White button in light mode */
+  color: #000080; /* Navy text in light mode */
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .scroll-to-top {
+  background-color: #000000; /* Black button in dark mode */
+  color: #00FFFF; /* Cyan text in dark mode */
 }
 
 .scroll-to-top:hover {
@@ -1055,18 +1094,24 @@ nav ul li a:hover::after {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: var(--primary-color);
-  color: var(--background-color);
+  background-color: #000080; /* Navy blue for light mode */
+  color: #ffffff; /* White text in light mode */
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
   cursor: pointer;
-  box-shadow: 0 5px 15px var(--shadow-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 128, 0.3); /* Navy shadow in light mode */
   transition: all 0.3s ease;
   position: relative;
   z-index: 1001;
+}
+
+[data-theme="dark"] .chat-toggle {
+  background-color: #00FFFF; /* Cyan for dark mode */
+  color: #000000; /* Black text in dark mode */
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3); /* Cyan shadow in dark mode */
 }
 
 .chat-toggle:hover {
@@ -1079,10 +1124,14 @@ nav ul li a:hover::after {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: var(--primary-color);
+  background-color: #000080; /* Navy blue ripple in light mode */
   opacity: 0.5;
   transform: scale(0);
   animation: ripple 1.5s infinite;
+}
+
+[data-theme="dark"] .chat-toggle::after {
+  background-color: #00FFFF; /* Cyan ripple in dark mode */
 }
 
 @keyframes ripple {
@@ -1131,27 +1180,45 @@ nav ul li a:hover::after {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid #000080; /* Navy border in light mode */
+  background-color: #000080; /* Navy background in light mode */
+}
+
+[data-theme="dark"] .chat-header {
+  border-bottom: 1px solid #00FFFF; /* Cyan border in dark mode */
+  background-color: #00FFFF; /* Cyan background in dark mode */
 }
 
 .chat-header h3 {
   margin: 0;
-  color: var(--primary-color);
+  color: #ffffff; /* White text in light mode */
   font-size: 1rem;
+}
+
+[data-theme="dark"] .chat-header h3 {
+  color: #000000; /* Black text in dark mode */
 }
 
 .chat-close {
   background: none;
   border: none;
-  color: var(--text-color);
+  color: #ffffff; /* White text in light mode */
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
+[data-theme="dark"] .chat-close {
+  color: #000000; /* Black text in dark mode */
+}
+
 .chat-close:hover {
-  color: var(--primary-color);
+  color: #f5f5f5; /* Light gray hover in light mode */
   transform: rotate(90deg);
+}
+
+[data-theme="dark"] .chat-close:hover {
+  color: #222222; /* Dark gray hover in dark mode */
 }
 
 .chat-messages {
@@ -1172,17 +1239,28 @@ nav ul li a:hover::after {
 
 .user-message {
   align-self: flex-end;
-  background-color: var(--primary-color);
-  color: var(--background-color);
+  background-color: #000080; /* Navy blue for light mode */
+  color: #ffffff; /* White text in light mode */
   font-weight: 700;
+}
+
+[data-theme="dark"] .user-message {
+  background-color: #00FFFF; /* Cyan for dark mode */
+  color: #000000; /* Black text in dark mode */
 }
 
 .ai-message {
   align-self: flex-start;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--border-color);
+  background-color: rgba(0, 0, 128, 0.1); /* Light navy background in light mode */
+  border: 1px solid rgba(0, 0, 128, 0.5); /* Navy border in light mode */
   font-style: italic;
-  color: var(--text-color);
+  color: #333333; /* Dark text in light mode */
+}
+
+[data-theme="dark"] .ai-message {
+  background-color: rgba(0, 255, 255, 0.1); /* Light cyan background in dark mode */
+  border: 1px solid rgba(0, 255, 255, 0.5); /* Cyan border in dark mode */
+  color: #f1f1f1; /* Light text in dark mode */
 }
 
 .user-message p,
@@ -1194,7 +1272,11 @@ nav ul li a:hover::after {
 .chat-form {
   display: flex;
   padding: 1rem;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid #000080; /* Navy border in light mode */
+}
+
+[data-theme="dark"] .chat-form {
+  border-top: 1px solid #00FFFF; /* Cyan border in dark mode */
 }
 
 .chat-form input {
