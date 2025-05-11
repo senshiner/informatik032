@@ -1,0 +1,149 @@
+/* 
+* Responsive CSS for Informatika 032 Website
+* Contains all media queries and responsive adjustments
+*/
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+  
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .apps-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    header {
+      padding: 1rem;
+    }
+  
+    .logo h1 {
+      font-size: 1.2rem;
+    }
+  
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background-color: var(--background-color);
+      box-shadow: -5px 0 15px var(--shadow-color);
+      transition: right 0.3s ease;
+      z-index: 1001;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    nav.active {
+      right: 0;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    nav ul li {
+      margin: 1rem 0;
+    }
+  
+    .mobile-nav-toggle {
+      display: block;
+      z-index: 1002;
+    }
+  
+    .hero-title {
+      font-size: 1.8rem;
+    }
+  
+    .timer {
+      flex-wrap: wrap;
+    }
+  
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .motto {
+      font-size: 1.5rem;
+    }
+  
+    .timer-grid {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  
+    .time-block {
+      min-width: 70px;
+    }
+  
+    .time-block span:first-child {
+      font-size: 1.8rem;
+    }
+    
+    .gallery-grid-container {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .apps-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .contact-form-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-circle {
+      width: 180px;
+      height: 180px;
+    }
+  
+    .motto {
+      font-size: 1.2rem;
+    }
+  
+    .timer-grid {
+      gap: 0.3rem;
+    }
+  
+    .time-block {
+      min-width: 60px;
+      padding: 0.4rem;
+    }
+  
+    .time-block span:first-child {
+      font-size: 1.3rem;
+    }
+  
+    .time-label {
+      font-size: 0.6rem;
+    }
+  
+    .countdown-start {
+      font-size: 0.7rem;
+    }
+    
+    .gallery-grid-container {
+      grid-template-columns: 1fr;
+    }
+  
+    .gallery-image {
+      height: 180px;
+    }
+    
+    .chat-box {
+      width: 300px;
+      right: -10px;
+    }
+  }

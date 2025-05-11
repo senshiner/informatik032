@@ -1,0 +1,75 @@
+/* 
+* Base CSS for Informatika 032 Website
+* Contains base styles, typography, and common elements
+*/
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+  
+  body {
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--primary-color);
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #000;
+    color: #fff;
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+  
+  [data-theme="dark"] .footer {
+    background-color: #1a1a1a;
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
