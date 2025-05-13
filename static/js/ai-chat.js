@@ -12,7 +12,7 @@ const predefinedResponses = {
     "thanks": "Sama-sama! Senang bisa membantu.",
     
     // Schedule
-    "jadwal": "Ketikan jadwal: jadwal senin, jadwal selasa, jadwal rabu, jadwal jumat"
+    "jadwal": "Ketikan jadwal: jadwal senin, jadwal selasa, jadwal rabu, jadwal jumat",
     "jadwal senin": "Komputer Grafik = 13:00, PAK = 14:40",
     "jadwal selasa": "Komunikasi Data = 08:50",
     "jadwal rabu": "Komputer Masyarakat = 07:10, Kalkulus = 08:50",
