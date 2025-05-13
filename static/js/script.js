@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
           aiResponse = predefinedResponse;
         } else {
           // No predefined response, send to API
-          const style = "Anda adalah asisten AI yang ramah dan profesional untuk website INFORMATIKA 032. Bersikaplah sopan, informatif, dan menarik, serta gunakan bahasa Indonesia yang jelas dan mudah dipahami.";
+          const style = "Anda adalah asisten AI yang ramah dan profesional untuk website INFORMATIKA 032. Bersikaplah sopan, informatif, dan menarik, serta gunakan bahasa Indonesia yang jelas dan mudah dipahami, jika ada pertanyaan tentang dosen serta kalender perkuliahan suruh check website Universitas Pamulang.";
           const sessionId = localStorage.getItem('sessionId') || 'guest-' + Math.random().toString(36).substring(2, 10);
   
           if (!localStorage.getItem('sessionId')) {
