@@ -10,16 +10,18 @@ const predefinedResponses = {
     "terima kasih": "Sama-sama! Senang bisa membantu.",
     "makasih": "Sama-sama! Senang bisa membantu.",
     "thanks": "Sama-sama! Senang bisa membantu.",
-    "thank you": "Sama-sama! Senang bisa membantu.",
+    
+    // Schedule
+    "jadwal": "Ketikan jadwal: jadwal senin, jadwal selasa, jadwal rabu, jadwal jumat"
+    "jadwal senin": "Komputer Grafik = 13:00, PAK = 14:40",
+    "jadwal selasa": "Komunikasi Data = 08:50",
+    "jadwal rabu": "Komputer Masyarakat = 07:10, Kalkulus = 08:50",
+    "jadwal jumat": "Bingg = 07:10, Sistem Operasi = 08:50, PKN = 10:30, Bindo = 14:00",
     
     // Basic questions
     "siapa kamu": "Saya adalah AI Assistant untuk kelas INFORMATIKA 032. Saya di sini untuk membantu menjawab pertanyaan Anda.",
     "namamu siapa": "Saya adalah AI Assistant untuk kelas INFORMATIKA 032.",
     "kamu siapa": "Saya adalah AI Assistant untuk kelas INFORMATIKA 032.",
-    
-    // About the class
-    "informatika 032": "INFORMATIKA 032 adalah kelas Teknik Informatika di Universitas Pamulang. Kelas kami fokus pada pengembangan teknologi dan inovasi.",
-    "tentang informatika": "Program Studi Informatika fokus pada pengembangan software, algoritma, dan sistem informasi untuk memecahkan berbagai masalah teknologi.",
     
     // Website related
     "website ini": "Website ini adalah platform resmi kelas INFORMATIKA 032 yang menampilkan informasi, gallery, dan berbagai aplikasi yang dibuat oleh mahasiswa kelas kami.",
