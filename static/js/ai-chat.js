@@ -1,4 +1,4 @@
-// Predefined responses for common questions
+// Responses Ai
 const predefinedResponses = {
     // Greetings
     "halo": "Halo! Ada yang bisa saya bantu?",
@@ -32,28 +32,23 @@ const predefinedResponses = {
     "selamat tinggal": "Sampai jumpa kembali! Jika ada pertanyaan lain, silahkan kembali kapan saja."
   };
   
-  // Function to check if the message matches any predefined response patterns
+  // Function response patterns
   function checkForPredefinedResponse(message) {
-    // Convert message to lowercase for case-insensitive matching
     const lowerMessage = message.toLowerCase().trim();
     
-    // Check exact matches first
     if (predefinedResponses[lowerMessage]) {
       return predefinedResponses[lowerMessage];
     }
     
-    // Check for partial matches (if the message contains a key phrase)
     for (const [key, response] of Object.entries(predefinedResponses)) {
       if (lowerMessage.includes(key)) {
         return response;
       }
     }
     
-    // No predefined response found
     return null;
   }
   
-  // Instead of ES module export, make it globally available
   window.AIChat = {
     checkForPredefinedResponse: checkForPredefinedResponse
   };

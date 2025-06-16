@@ -1,11 +1,7 @@
-/* 
-* Variables CSS for Informatika 032 Website
-* Contains color scheme and theme variables
-*/
-
+/* Variable */
 :root {
-    --primary-color: #000080; /* Navy blue for light mode */
-    --primary-color-rgb: 0, 0, 128; /* RGB values for Navy blue */
+    --primary-color: #000080;
+    --primary-color-rgb: 0, 0, 128;
     --background-color: #ffffff;
     --text-color: #333333;
     --secondary-color: #007bff;
@@ -16,8 +12,8 @@
   
   /* Dark mode variables */
   [data-theme="dark"] {
-    --primary-color: #00FFFF; /* Cyan for dark mode */
-    --primary-color-rgb: 0, 255, 255; /* RGB values for Cyan */
+    --primary-color: #00FFFF;
+    --primary-color-rgb: 0, 255, 255;
     --background-color: #121212;
     --text-color: #f1f1f1;
     --secondary-color: #00FFFF;

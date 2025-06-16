@@ -1,9 +1,9 @@
-// Theme toggle functionality
+// Theme toggle
 document.addEventListener('DOMContentLoaded', function() {
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const savedTheme = localStorage.getItem('theme') || 'light';
   
-    // Set initial theme
+    // Set theme
     document.documentElement.setAttribute('data-theme', savedTheme);
   
     themeToggleBtn.addEventListener('click', function() {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   
-    // Close mobile nav when clicking on a nav link
+    // Close mobile nav
     const navLinks = document.querySelectorAll('nav ul li a');
   
     navLinks.forEach(link => {
@@ -41,13 +41,12 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   
-    // Timer functionality
+    // Timer
     const daysElement = document.getElementById('days');
     const hoursElement = document.getElementById('hours');
     const minutesElement = document.getElementById('minutes');
     const secondsElement = document.getElementById('seconds');
   
-    // Set the target date: September 9, 2024 08:00:00
     const targetDate = new Date('2024-09-09T08:00:00').getTime();
   
     function updateTimer() {
@@ -73,18 +72,17 @@ document.addEventListener('DOMContentLoaded', function() {
       secondsElement.textContent = seconds < 10 ? `0${seconds}` : seconds;
     }
   
-    // Update timer immediately and then every second
+    // Update timer
     updateTimer();
     setInterval(updateTimer, 1000);
   
-    // Smooth scrolling for navigation links
+    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
   
         const targetId = this.getAttribute('href');
   
-        // Check if targetId is just "#" (hash only)
         if (targetId === "#") {
           window.scrollTo({
             top: 0,
@@ -107,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   
-    // Contact Form Functionality
+    // Contact Form
     const contactForm = document.getElementById('contact-form');
     const messagesList = document.getElementById('messages-list');
   
@@ -115,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadMessages() {
       const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
   
-      // Display the 3 most recent messages
+      // Display recent messages
       messagesList.innerHTML = '';
       const recentMessages = messages.slice(0, 3);
   
@@ -135,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   
-    // Load messages on page load
+    // Load messages
     loadMessages();
   
     // Submit form handler
@@ -149,20 +147,17 @@ document.addEventListener('DOMContentLoaded', function() {
       const message = messageInput.value.trim();
   
       if (name && message) {
-        // Create new message object
+        // Create new message
         const newMessage = {
           name: name,
           text: message,
           date: new Date().toLocaleDateString()
         };
   
-        // Get existing messages
         const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
   
-        // Add new message to the beginning of the array
         messages.unshift(newMessage);
   
-        // Save back to localStorage
         localStorage.setItem('contactMessages', JSON.stringify(messages));
   
         // Reload messages
@@ -174,16 +169,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   
-    // Gallery Filter Functionality
+    // Gallery Filter
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryCards = document.querySelectorAll('.gallery-card');
   
     filterBtns.forEach(btn => {
       btn.addEventListener('click', function() {
-        // Remove active class from all buttons
         filterBtns.forEach(b => b.classList.remove('active'));
   
-        // Add active class to clicked button
         this.classList.add('active');
   
         const filter = this.getAttribute('data-filter');
@@ -199,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Gallery card hover-only functionality
+    // Gallery card hover
     galleryCards.forEach(card => {
       card.addEventListener('mouseenter', function() {
         this.querySelector('.gallery-overlay').style.opacity = '1';
@@ -210,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   
-    // Chat with AI Functionality
+    // Chat with AI
     const chatToggle = document.getElementById('chat-toggle');
     const chatBox = document.getElementById('chat-box');
     const chatClose = document.getElementById('chat-close');
@@ -241,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear input
         chatInput.value = '';
   
-        // Send message to API (or use mock response for now)
+        // Send message to API
         sendMessage(message);
       }
     });
@@ -266,24 +259,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Send message to API or use predefined response
     async function sendMessage(message) {
       try {
-        // Show typing indicator
         const typingIndicator = document.createElement('div');
         typingIndicator.classList.add('ai-message', 'typing-indicator');
         typingIndicator.innerHTML = '<p>AI is typing...</p>';
         chatMessages.appendChild(typingIndicator);
         chatMessages.scrollTop = chatMessages.scrollHeight;
   
-        // Check for predefined responses first
         const predefinedResponse = window.AIChat.checkForPredefinedResponse(message);
         
         let aiResponse;
         
         if (predefinedResponse) {
-          // Use predefined response (simulate small typing delay)
           await new Promise(resolve => setTimeout(resolve, 500));
           aiResponse = predefinedResponse;
         } else {
-          // No predefined response, send to API
           const style = "Anda adalah asisten AI yang ramah dan profesional untuk website INFORMATIKA 032. Bersikaplah sopan, informatif, dan menarik, serta gunakan bahasa Indonesia yang jelas dan mudah dipahami, jika ada pertanyaan tentang dosen serta kalender perkuliahan suruh check website Universitas Pamulang.";
           const sessionId = localStorage.getItem('sessionId') || 'guest-' + Math.random().toString(36).substring(2, 10);
   
@@ -297,7 +286,6 @@ document.addEventListener('DOMContentLoaded', function() {
           aiResponse = response.data.result || 'Maaf, saya tidak dapat memproses permintaan Anda saat ini.';
         }
   
-        // Remove typing indicator
         chatMessages.removeChild(typingIndicator);
   
         // Add AI response
@@ -308,16 +296,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   
-    // Countdown timer - Calculate elapsed time since September 9, 2024
+    // Countdown timer
     function updateCountdown() {
-      // Set the start date: September 9, 2024 08:00:00
       const startDate = new Date('2024-09-09T08:00:00').getTime();
       const now = new Date().getTime();
       
-      // Calculate elapsed time (current time - start time)
       const elapsedTime = now - startDate;
       
-      // If the start date is in the future, show zeros
       if (elapsedTime < 0) {
         document.getElementById('days').textContent = "000";
         document.getElementById('hours').textContent = "00";
@@ -332,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
       
-      // Display the values
+      // Display
       document.getElementById('days').textContent = days < 100 ? 
         (days < 10 ? `00${days}` : `0${days}`) : days;
       document.getElementById('hours').textContent = hours < 10 ? `0${hours}` : hours;
@@ -340,7 +325,6 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('seconds').textContent = seconds < 10 ? `0${seconds}` : seconds;
     }
   
-    // Initialize and update every second
     updateCountdown();
     setInterval(updateCountdown, 1000);
   });

@@ -1,16 +1,4 @@
-/* ==========================================================================
-   AI Chat Styles
-   ========================================================================== */
-
-/* This file contains all styles related to the AI chat functionality
-   Created by: INFORMATIKA 032
-   Last updated: 2024
-*/
-
-/* ==========================================================================
-   Chat Container
-   ========================================================================== */
-
+/* Container */
    .chat-container {
     position: fixed;
     right: 30px;
@@ -74,9 +62,7 @@
     }
   }
   
-  /* ==========================================================================
-     Chat Box
-     ========================================================================== */
+  /* Chat Box */
   
   .chat-box {
     position: absolute;
@@ -120,7 +106,7 @@
     font-weight: 600;
   }
   
-  /* Dark mode specific styles for chat header */
+  /* Dark mode */
   [data-theme="dark"] .chat-header h3 {
     color: #000000;
   }
@@ -137,7 +123,7 @@
     border-radius: 50%;
   }
   
-  /* Dark mode specific styles for close button */
+  /* Dark mode close button */
   [data-theme="dark"] .chat-close {
     color: #000000;
   }
@@ -151,9 +137,7 @@
     background-color: rgba(0, 0, 0, 0.1);
   }
   
-  /* ==========================================================================
-     Chat Messages
-     ========================================================================== */
+  /* Chat Messages */
   
   .chat-messages {
     flex-grow: 1;
@@ -165,7 +149,7 @@
     background-color: var(--background-color);
   }
   
-  /* User and AI Message Styles */
+  /* Message Styles */
   .user-message,
   .ai-message {
     max-width: 80%;
@@ -218,9 +202,7 @@
     50% { opacity: 1; }
   }
   
-  /* ==========================================================================
-     Chat Form
-     ========================================================================== */
+  /* Chat Form */
   
   .chat-form {
     display: flex;
@@ -272,9 +254,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
   
-  /* ==========================================================================
-     Responsive Styles
-     ========================================================================== */
+  /* Responsive Styles */
   
   @media (max-width: 480px) {
     .chat-box {

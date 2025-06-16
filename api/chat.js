@@ -1,6 +1,6 @@
 module.exports = async (req, res) => {
     try {
-        const response = await fetch('https://fastrestapis.fasturl.cloud/aillm/gpt-4o', {
+        const response = await fetch('https://archive.lick.eu.org/api/ai/gpt-4-logic', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
