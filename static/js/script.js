@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('sessionId', sessionId);
           }
   
-          const apiUrl = `https://fastrestapis.fasturl.cloud/aillm/gpt-4o?ask=${encodeURIComponent(message)}&style=${encodeURIComponent(style)}&sessionId=${encodeURIComponent(sessionId)}`;
+          const apiUrl = `https://archive.lick.eu.org/api/ai/gpt-4-logic?ask=${encodeURIComponent(message)}&style=${encodeURIComponent(style)}&sessionId=${encodeURIComponent(sessionId)}`;
           
           const response = await axios.get(apiUrl);
           aiResponse = response.data.result || 'Maaf, saya tidak dapat memproses permintaan Anda saat ini.';
