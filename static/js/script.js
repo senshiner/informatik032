@@ -256,39 +256,43 @@ document.addEventListener('DOMContentLoaded', function() {
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
   
-    // Send message to API or use predefined response
+      // Send message to API or use predefined response
     async function sendMessage(message) {
       try {
         const typingIndicator = document.createElement('div');
         typingIndicator.classList.add('ai-message', 'typing-indicator');
-        typingIndicator.innerHTML = '<p>AI is typing...</p>';
+        typingIndicator.innerHTML = '<p>AI sedang mengetik...</p>';
         chatMessages.appendChild(typingIndicator);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-  
+
         const predefinedResponse = window.AIChat.checkForPredefinedResponse(message);
-        
+
         let aiResponse;
-        
+
         if (predefinedResponse) {
           await new Promise(resolve => setTimeout(resolve, 500));
           aiResponse = predefinedResponse;
         } else {
-          const style = "Anda adalah asisten AI yang ramah dan profesional untuk website INFORMATIKA 032. Bersikaplah sopan, informatif, dan menarik, serta gunakan bahasa Indonesia yang jelas dan mudah dipahami, jika ada pertanyaan tentang dosen serta kalender perkuliahan suruh check website Universitas Pamulang.";
+          const logic = `Anda adalah asisten AI ramah dan profesional untuk website INFORMATIKA 032. 
+          Bersikaplah sopan, informatif, dan menarik. Jawab dengan bahasa Indonesia yang mudah dipahami. 
+          Jika ditanya soal dosen atau kalender akademik, arahkan ke website resmi Universitas Pamulang.`;
+
           const sessionId = localStorage.getItem('sessionId') || 'guest-' + Math.random().toString(36).substring(2, 10);
-  
           if (!localStorage.getItem('sessionId')) {
             localStorage.setItem('sessionId', sessionId);
           }
-  
-          const apiUrl = `https://archive.lick.eu.org/api/ai/gpt-4-logic?ask=${encodeURIComponent(message)}&style=${encodeURIComponent(style)}&sessionId=${encodeURIComponent(sessionId)}`;
-          
-          const response = await axios.get(apiUrl);
-          aiResponse = response.data.result || 'Maaf, saya tidak dapat memproses permintaan Anda saat ini.';
+
+          const apiUrl = '/api/chat';
+          const response = await axios.post(apiUrl, {
+            text: message,
+            logic: logic,
+            sessionId: sessionId
+          });
+
+          aiResponse = response.data.reply || 'Maaf, saya tidak dapat memproses permintaan Anda.';
         }
-  
+
         chatMessages.removeChild(typingIndicator);
-  
-        // Add AI response
         addMessage('ai', `AI: ${aiResponse}`);
       } catch (error) {
         console.error('Error sending message:', error);
