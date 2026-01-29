@@ -1,0 +1,13 @@
+/* Import original CSS files to preserve exact styling. */
+@import url("/static/css/variables.css");
+@import url("/static/css/base.css");
+@import url("/static/css/header.css");
+@import url("/static/css/hero.css");
+@import url("/static/css/about.css");
+@import url("/static/css/gallery.css");
+@import url("/static/css/apps.css");
+@import url("/static/css/contact.css");
+@import url("/static/css/responsive.css");
+@import url("/static/css/ai-chat.css");
+
+/* Tailwind utilities will be added later; for now keep original CSS as source-of-truth. */
